@@ -16,7 +16,7 @@ const Header = () => {
         <img
           alt="logo"
           src="https://img.icons8.com/bubbles/2x/street-view.png"
-          style={{height:"50px"}}
+          style={{ height: '50px' }}
         />
         <div className="headerInput">
           <SearchIcon />
@@ -42,14 +42,17 @@ const Header = () => {
       </div>
 
       <div className="headerRight">
-        <div className="headerInfo" style={{maxHeight:'40px',justifyContent:'center'}}>
-          <IconButton>
+        <div
+          className="headerInfo"
+          style={{ maxHeight: '40px', justifyContent: 'center' }}
+        >
+          <IconButton alignItems='center'>
             <Avatar fontSize="small" />
           </IconButton>
-          <h4 style={{textAlign:'center'}}>Aditya Shah</h4>
+          <h4>Aditya Shah</h4>
         </div>
 
-        <IconButton className="iconLeft" >
+        <IconButton className="iconLeft">
           <AddIcon />
         </IconButton>
         <IconButton className="iconLeft">
