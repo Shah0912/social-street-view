@@ -12,25 +12,25 @@ import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 const Header = () => {
   return (
     <div className="header">
-
       <div className="headerLeft">
-        <img alt ="logo" src="" />
+        <img
+          alt="logo"
+          src="https://img.icons8.com/bubbles/2x/street-view.png"
+          style={{height:"50px"}}
+        />
         <div className="headerInput">
           <SearchIcon />
-          <input placeholder="Search" type = "text" />
+          <input placeholder="Search" type="text" />
         </div>
-        
       </div>
 
-      
       <div className="headerCenter">
-
         <div className="headerOption headerOption--active">
-          <HomeIcon fontSize ="large"/>
+          <HomeIcon fontSize="large" />
         </div>
 
         <div className="headerOption">
-          <StreetviewIcon  fontSize ="large"/>
+          <StreetviewIcon fontSize="large" />
         </div>
 
         {/* <div className="homeOptions">
@@ -39,32 +39,28 @@ const Header = () => {
           </IconButton>
           
         </div> */}
-
       </div>
 
       <div className="headerRight">
-        
-        <div className="headerInfo">
+        <div className="headerInfo" style={{maxHeight:'40px',justifyContent:'center'}}>
           <IconButton>
-            <Avatar fontSize="small"/>
+            <Avatar fontSize="small" />
           </IconButton>
-          <h4>Aditya Shah</h4>
+          <h4 style={{textAlign:'center'}}>Aditya Shah</h4>
         </div>
 
-        <IconButton className = "iconLeft">
+        <IconButton className="iconLeft" >
           <AddIcon />
         </IconButton>
-        <IconButton className = "iconLeft">
+        <IconButton className="iconLeft">
           <NotificationsActiveIcon />
         </IconButton>
-        <IconButton className = "iconLeft">
+        <IconButton className="iconLeft">
           <ArrowDropDownIcon />
         </IconButton>
-
       </div>
-
     </div>
-  );
+  )
 };
 
 export default Header;
