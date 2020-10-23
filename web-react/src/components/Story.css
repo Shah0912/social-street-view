@@ -10,6 +10,9 @@
     margin-right: 10px;
     transition: transform 100ms ease-in;
     cursor: pointer;
+    max-width: 120px;
+    overflow: hidden;
+    border: solid red;
 }
 
 .story:hover {

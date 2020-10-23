@@ -1,6 +1,14 @@
 .storyReel {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
     flex: 2;
     padding: 20px;
+    /* max-width: 1000px; */
+    /* max-height: 100px; */
+    /* max-block-size: 100%; */
+    /* overflow: hidden; */
+    /* min-width: 600px; */
+    /* overflow: hidden; */
+    border: solid blue ;
 }

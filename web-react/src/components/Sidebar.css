@@ -6,3 +6,9 @@
     flex-direction: row;
     border : solid red;
 } */
+
+.sidebar {
+    max-width: 100%;
+    /* min-width: 300px; */
+    overflow: hidden;
+}
