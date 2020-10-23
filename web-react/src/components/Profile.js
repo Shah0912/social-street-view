@@ -7,13 +7,14 @@ function Profile() {
     <div>
       <Container maxWidth="md">
         <Details />
+                                {/* 
         <div
           style={{
-            marginTop: '30px',
+            
             marginBottom: '30px',
-            borderBottom: '1px solid #999',
+            
           }}
-        ></div>
+        ></div> */}
         <PostGrid />
       </Container>
     </div>
