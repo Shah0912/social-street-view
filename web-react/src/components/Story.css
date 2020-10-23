@@ -1,5 +1,7 @@
 .story{
     position: relative;
+    /* padding: 20px; */
+    margin-bottom: 10px;
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;

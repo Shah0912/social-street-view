@@ -13,4 +13,5 @@
 .sidebarRow > h4 {
     margin-left: 20px;
     font-weight: 600;
+    /* overflow: hidden; */
 }

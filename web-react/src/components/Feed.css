@@ -1,6 +1,8 @@
 .feed {
     display: flex;
     flex: 4;
-    justify-content: right;
+    /* justify-content: center; */
+    padding: 30px 150px;
+    border: solid pink;
     /* border : solid green; */
 }

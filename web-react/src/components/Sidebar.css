@@ -1,14 +1,15 @@
-/* .sidebar {
-    display: flex;
-    flex: 1;
-    justify-content: center;
-    margin-right: 30px;
-    flex-direction: row;
-    border : solid red;
-} */
-
 .sidebar {
+    /* display: flex; */
     max-width: 100%;
     /* min-width: 300px; */
+    flex-wrap: wrap;
     overflow: hidden;
+    border: solid yellow    ;
 }
+
+/* @media (max-width:500px) {
+    .sidebar {
+      display: none;
+    }
+  } */
+
