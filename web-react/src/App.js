@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from './components/Header';
-
+import StoryReel from './components/StoryReel';
+import Home from './components/Home'
 // import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 
 // import UserList from './components/UserList'
@@ -139,7 +140,9 @@ export default function App() {
     <div>
       
       <Header />
-
+      {/* 
+      <StoryReel /> */}
+      <Home />
       {/* <h1>Hello</h1> */}
 
     </div>

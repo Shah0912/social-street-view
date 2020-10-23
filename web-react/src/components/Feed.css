@@ -1,0 +1,6 @@
+.feed {
+    display: flex;
+    flex: 4;
+    justify-content: right;
+    /* border : solid green; */
+}
