@@ -5,6 +5,7 @@ import Sidebar from './Sidebar'
 import Post from './Post'
 
 import "./Feed.css";
+import Followers from './Followers';
 
 function Feed() {
 

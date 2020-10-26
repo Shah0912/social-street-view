@@ -3,11 +3,11 @@ import React from 'react';
 
 import "./SidebarRow.css"
 
-function SidebarRow({name, profilePic}) {
+function SidebarRow({username, profilePic}) {
     return (
         <div className="sidebarRow">
             <Avatar src={profilePic} />
-            <h4>{name}</h4>
+            <h4>{username}</h4>
             
         </div>
     )
