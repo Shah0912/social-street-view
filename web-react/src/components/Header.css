@@ -27,7 +27,7 @@
 }
 
 .headerLeft > img{
-    height: 40 px;
+    height: 10 px;
 }
 
 
@@ -101,4 +101,40 @@
 
 .iconLeft {
     margin-left: 50px;
+}
+
+@media (max-width:500px) {
+    .header {
+        padding : 5px 8px;
+        position : sticky;
+    }
+
+    .headerInput {
+        display: flex;
+        align-items: center;
+        background-color: #eff2f5;
+        padding: 5px;
+        margin-top: 10px;
+        margin-left: 5px;
+        border-radius: 999px;
+        max-height: 15px;
+    }
+
+    .headerOption:hover {
+        background-color: #eff2f5;
+        border-radius: 10px;
+        align-items: center;
+        padding: 0 30px;
+        border-bottom: none;
+    }
+
+    .headerInfo > h4 {
+        font-size: 20;
+        margin-left: 5px;
+    }
+
+    .iconLeft {
+        margin-left: 20px;
+    }
+
 }

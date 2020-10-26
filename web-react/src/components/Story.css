@@ -33,3 +33,28 @@
     color: white;
 }
 
+@media (max-width:500px) {
+    .story {
+        width: 40px;
+        height: 60px;
+        display: flex;
+        /* align-self: center; */
+        /* justify-content: center; */
+    }
+    .storyAvatar {
+        visibility: hidden;
+    }
+    .story > h4 {
+        /* margin-right: 30px; */
+        /* margin-top: 100px; */
+        font-size: 6px;
+        /* margin-top: 100px; */
+        /* position: relative; */
+        /* bottom: 0%; */
+        /* text-align: center; */
+        /* display: flex; */
+        /* justify-content: center; */
+        text-align: left;
+    }
+  }
+

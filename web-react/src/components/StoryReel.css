@@ -12,3 +12,14 @@
     /* overflow: hidden; */
     border: solid blue ;
 }
+
+@media (max-width:500px) {
+    .storyReel {
+        /* display: flex; */
+        /* flex: 4; */
+        display: grid;
+        grid-template-columns: repeat(5,1fr);
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+  }
