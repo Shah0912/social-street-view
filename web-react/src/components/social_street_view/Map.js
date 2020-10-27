@@ -1,9 +1,9 @@
 import React, { useState, useRef } from 'react'
 import useSwr from 'swr'
-import ReactMapGL, { Marker, FlyToInterpolator, Popup } from 'react-map-gl'
+import ReactMapGL, {GeolocateControl, Marker, FlyToInterpolator, Popup } from 'react-map-gl'
 import useSuperCluster from 'use-supercluster'
 import ImageRoundedIcon from '@material-ui/icons/ImageRounded'
-import { Button, Container } from '@material-ui/core'
+import { Button, Container,Paper } from '@material-ui/core'
 
 const fetcher = (...args) => fetch(...args).then((response) => response.json())
 
@@ -17,6 +17,10 @@ export default function Map() {
     latitude: 52.6376,
     longitude: -1.135171,
     zoom: 12,
+    transitionInterpolator: new FlyToInterpolator({
+      speed: 2,
+    }),
+    transitionDuration: 'auto',
   })
   const points = crimes.map((crime) => ({
     type: 'Feature',
@@ -44,7 +48,7 @@ export default function Map() {
     options: { radius: 75, maxZoom: 20 },
   })
 
-  const [showPopup, setShowPopup] = useState(false)
+  const [showPopup, setShowPopup] = useState(0)
 
   return (
     <Container maxWidth="lg">
@@ -57,6 +61,9 @@ export default function Map() {
         width="100%"
         height="90vh"
       >
+        <GeolocateControl style={{width:'0px',height:'0px'}} /* auto={true} */ />
+            
+          
         {clusters.map((cluster) => {
           const [longitude, latitude] = cluster.geometry.coordinates
           const {
@@ -110,16 +117,25 @@ export default function Map() {
 
           return (
             <React.Fragment>
-              {showPopup && (
+              {showPopup === cluster.properties.crimeId && (
                 <Popup
                   latitude={latitude}
                   longitude={longitude}
                   closeButton={false}
                   closeOnClick={false}
+                  offsetLeft={30}
+                  
                   //onClose={() => this.setState({showPopup: false})}
                   //anchor="top"
                 >
-                  <div>You are here</div>
+                  <Paper children = {
+                    <img style = {{width:'100px'}} 
+                    src = 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg'
+                    />
+                  }
+                  square={true}
+                  
+                  />
                 </Popup>
               )}
               <Marker
@@ -130,15 +146,17 @@ export default function Map() {
                 <Button
                   color="primary"
                   onMouseEnter={() => {
-                    setShowPopup(true)
-                    console.log(showPopup)
+                    setShowPopup(cluster.properties.crimeId)
                   }}
                   onMouseLeave={() => {
-                    setShowPopup(false)
+                    setShowPopup(0)
                     console.log(showPopup)
                   }}
+                  style={{alignItems:'center',
+                  justifyContent:'center'}}
+                  
                 >
-                  <ImageRoundedIcon />
+                  <ImageRoundedIcon fontSize='medium'/>
                 </Button>
               </Marker>
             </React.Fragment>
