@@ -1,17 +1,21 @@
 import React from 'react'
-import Header from './components/Header'
-import Profile from './components/Profile'
-import Home from './components/Home'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
+import Header from './components/Header'
+import Profile from './components/profile/Profile'
+import Home from './components/feed/Home'
+import Map from './components/social_street_view/Map'
 
 export default function App() {
   return (
-    <div>
-      <Header />
-      <Home />
-      {/* <Profile /> */}
-      {/* <h1>Hello</h1> */}
-    </div>
+    <React.Fragment>
+      <Router>
+            <Header />
+            <Route path="/" exact component={Home} />
+            <Route path="/street_view" component={Map} />
+            <Route path="/profile" component={Profile} />
+      </Router>
+    </React.Fragment>
   )
 }
 
