@@ -4,6 +4,12 @@ import axios from 'axios';
 import {Progress} from 'reactstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
+
+import "./Upload.css"
+
+
+
 class Upload extends Component {
   constructor(props) {
     super(props);
@@ -94,20 +100,20 @@ onChangeHandler=event=>{
 
   render() {
     return (
-      <div class="container">
+      <div class="container" className="Upload">
 	      <div class="row">
       	  <div class="offset-md-3 col-md-6">
                <div class="form-group files">
-                <label>Upload Your File </label>
-                <input type="file" multiple onChange={this.onChangeHandler}/>
+                <label className="Upload-header">Upload Your File </label>
+                <input type="file" className= "fileInput" multiple onChange={this.onChangeHandler}/>
               </div>  
-              <div class="form-group">
+              <div class="form-group" className= "fileInput">
               <ToastContainer />
-              <Progress max="100" color="success" value={this.state.loaded} >{Math.round(this.state.loaded,2) }%</Progress>
+              <Progress max="100" className="progress" color="success" value={this.state.loaded} >{Math.round(this.state.loaded,2) }%</Progress>
         
               </div> 
               
-              <button type="button"  onClick={this.onClickHandler}>Upload</button>
+              <button type="button" className="button" onClick={this.onClickHandler}>Upload</button>
 
 	      </div>
       </div>

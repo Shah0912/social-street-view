@@ -1,0 +1,60 @@
+.Upload {
+    text-align: center;
+    background-color: lightgray;
+    min-height: 100vh;
+  }
+  
+  .Upload-logo {
+    animation: Upload-logo-spin infinite 20s linear;
+    height: 40vmin;
+  }
+  
+  .Upload-header {
+    box-shadow: 5px 5px 5px 5px rgba(0,0,0,0.075);
+    /* min-height: 100vh; */
+    background-color: aliceblue;
+    min-height: 5vh;
+    padding: 20px;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: black;
+  }
+
+  .fileInput {
+      padding : 20px;
+      color: black;
+      font-size: large;
+      justify-content: space-between;
+  }
+  
+  .progress {
+      color: black;
+      display: flex;
+      justify-content: center;
+  }
+
+  .Upload-link {
+    color: #61dafb;
+    font-size: large;
+  }
+  
+  .button {
+    color: black;
+    background-color: white;
+    box-shadow: 0px 5px 8px -9px rgba(0,0,0,0.75);
+    justify-content: center;
+    font-size: large;
+  }
+  
+  @keyframes Upload-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
