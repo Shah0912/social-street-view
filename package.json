@@ -32,6 +32,8 @@
     ]
   },
   "dependencies": {
+    "cors": "^2.8.5",
+    "multer": "^1.4.2",
     "swr": "^0.3.6",
     "use-supercluster": "^0.2.9"
   }
