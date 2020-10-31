@@ -19,12 +19,12 @@ const Header = () => {
   return (
     <div className="header">
       <div className="headerLeft">
-        <Link to='/'>
-        <img
-          alt="logo"
-          src="https://img.icons8.com/bubbles/2x/street-view.png"
-          style={{ height: '50px' }}
-        />
+        <Link to="/">
+          <img
+            alt="logo"
+            src="https://img.icons8.com/bubbles/2x/street-view.png"
+            style={{ height: '50px' }}
+          />
         </Link>
         <div className="headerInput">
           <SearchIcon />
@@ -34,14 +34,14 @@ const Header = () => {
 
       <div className="headerCenter">
         <div className="headerOption headerOption--active">
-          <Link to="/" style = {linkStyle}>
-          <HomeIcon fontSize="large" />
+          <Link to="/" style={linkStyle}>
+            <HomeIcon fontSize="large" />
           </Link>
         </div>
 
         <div className="headerOption">
-          <Link to="/street_view" style = {linkStyle}>
-          <StreetviewIcon fontSize="large" />
+          <Link to="/street_view" style={linkStyle}>
+            <StreetviewIcon fontSize="large" />
           </Link>
         </div>
 
@@ -58,13 +58,12 @@ const Header = () => {
           className="headerInfo"
           style={{ maxHeight: '40px', justifyContent: 'center' }}
         >
-          <Link to = '/profile'>
-          <IconButton alignItems='center'>
-            <Avatar fontSize="small" />
-          </IconButton>
+          <Link to="/profile">
+            <IconButton alignItems="center">
+              <Avatar fontSize="small" />
+            </IconButton>
           </Link>
           <h4>Aditya Shah</h4>
-          
         </div>
 
         <IconButton className="iconLeft">

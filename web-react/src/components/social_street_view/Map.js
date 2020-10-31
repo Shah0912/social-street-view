@@ -60,10 +60,13 @@ export default function Map() {
         ref={mapRef}
         width="100%"
         height="90vh"
+        mapStyle='mapbox://styles/shekokar/ckgxa6j0f4vl319r1algxld2d'
       >
-        <GeolocateControl style={{width:'0px',height:'0px'}} /* auto={true} */ />
-            
-          
+        <div style={{ position: 'absolute', top: 0, left: 0, padding: '10px' }}>
+          <GeolocateControl  /* auto={true} */
+          />
+        </div>
+
         {clusters.map((cluster) => {
           const [longitude, latitude] = cluster.geometry.coordinates
           const {
@@ -124,17 +127,18 @@ export default function Map() {
                   closeButton={false}
                   closeOnClick={false}
                   offsetLeft={30}
-                  
+
                   //onClose={() => this.setState({showPopup: false})}
                   //anchor="top"
                 >
-                  <Paper children = {
-                    <img style = {{width:'100px'}} 
-                    src = 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg'
-                    />
-                  }
-                  square={true}
-                  
+                  <Paper
+                    children={
+                      <img
+                        style={{ width: '100px' }}
+                        src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg"
+                      />
+                    }
+                    square={true}
                   />
                 </Popup>
               )}
@@ -152,11 +156,9 @@ export default function Map() {
                     setShowPopup(0)
                     console.log(showPopup)
                   }}
-                  style={{alignItems:'center',
-                  justifyContent:'center'}}
-                  
+                  style={{ alignItems: 'center', justifyContent: 'center' }}
                 >
-                  <ImageRoundedIcon fontSize='medium'/>
+                  <ImageRoundedIcon fontSize="medium" />
                 </Button>
               </Marker>
             </React.Fragment>
