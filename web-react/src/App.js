@@ -18,6 +18,8 @@ export default function App() {
         <Route path="/street_view" component={Map} />
         <Route path="/profile" component={Profile} />
         <Route path="/sentiment" component={Sentiment} />
+        <Route path="/upload" component={Upload} />
+        <Route path="/post" component={Ipost} />
         {/* <Upload /> */}
         {/* <Ipost /> */}
       </Router>
