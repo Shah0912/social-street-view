@@ -5,6 +5,9 @@ import neo4j from 'neo4j-driver'
 import { makeAugmentedSchema } from 'neo4j-graphql-js'
 import dotenv from 'dotenv'
 import { initializeDatabase } from './initialize'
+import { resolvers } from './resolve'
+
+/* console.log(resolvers) */
 
 // set environment variables from .env
 dotenv.config()
@@ -21,6 +24,7 @@ const app = express()
 
 const schema = makeAugmentedSchema({
   typeDefs,
+  resolvers,
   config: {
     query: {
       exclude: ['RatingCount'],
@@ -30,6 +34,7 @@ const schema = makeAugmentedSchema({
     },
   },
 })
+
 
 /*
  * Create a Neo4j driver instance to connect to the database
