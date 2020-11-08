@@ -9,6 +9,9 @@ type Post {
    users_posted: [User] @relation(name: "posted", direction: "IN")
    comments_on: [Comment] @relation(name: "on", direction: "IN")
    users_likes: [User] @relation(name: "likes", direction: "IN")
+   has_image: [Image] @relation(name:"has",direction: "OUT")
+   has_video: [Video] @relation(name:"has",direction: "OUT")
+   has_text: [Image] @relation(name:"has",direction: "OUT")
 }
 
 type Image {
@@ -77,10 +80,10 @@ type User {
    likes: [Post] @relation(name: "likes", direction: "OUT")
 }
 
-
-
-
-
-
-
+type Query {
+  photo(file: String): Image @neo4j_ignore
+}
+type Photo {
+  url: String
+}
 
