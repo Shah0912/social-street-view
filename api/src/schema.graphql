@@ -80,8 +80,8 @@ type User {
    likes: [Post] @relation(name: "likes", direction: "OUT")
 }
 
-type Query {
-  photo(file: String): Image @neo4j_ignore
+type Mutation {
+  photo(file: String, id: String, caption: String): Image
 }
 type Photo {
   url: String
