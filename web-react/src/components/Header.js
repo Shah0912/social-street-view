@@ -10,11 +10,18 @@ import AddIcon from '@material-ui/icons/Add'; // For posting
 import { Avatar, IconButton } from "@material-ui/core";
 import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import {useAuth0} from '@auth0/auth0-react'
+import {Button} from '@material-ui/core'
+
+
 
 const Header = () => {
   const linkStyle = {
     color:'#2e81f4'
   }
+
+  const {loginWithRedirect, logout, isAuthenticated, user} = useAuth0();
+
 
   return (
     <div className="header">
@@ -58,12 +65,21 @@ const Header = () => {
           className="headerInfo"
           style={{ maxHeight: '40px', justifyContent: 'center' }}
         >
+
           <Link to="/profile">
             <IconButton alignItems="center">
-              <Avatar fontSize="small" />
+              {
+                isAuthenticated &&
+                <Avatar fontSize="small" src={user.picture} alt = {user.name}/>
+              }
             </IconButton>
           </Link>
-          <h4>Aditya Shah</h4>
+          {/* <h4>Aditya Shah</h4> */}
+          {/* <h4>{user.name}</h4> */}
+          {
+            isAuthenticated &&
+            <h4>{user.name}</h4>
+          }
         </div>
 
 
@@ -76,9 +92,24 @@ const Header = () => {
         <IconButton className="iconLeft">
           <NotificationsActiveIcon />
         </IconButton>
-        <IconButton className="iconLeft">
+        {/* <IconButton className="iconLeft">
           <ArrowDropDownIcon />
-        </IconButton>
+        </IconButton> */}
+        {!isAuthenticated &&
+          <Button color = "inherit" onClick={()=>loginWithRedirect()} >
+            Log In
+          </Button>
+          
+
+        }
+
+        {
+          isAuthenticated &&
+          <Button color="inherit" onClick={()=>logout()}>
+            Log Out
+          </Button>
+        }
+        
       </div>
     </div>
   )

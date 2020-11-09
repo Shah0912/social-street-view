@@ -8,8 +8,13 @@ import Map from './components/social_street_view/Map'
 import Upload from './components/data_aquisition/Upload'
 import Ipost from './components/individual_post/Ipost'
 import Sentiment from './components/sentiment/Sentiment'
+import {useAuth0} from '@auth0/auth0-react'
+
 
 export default function App() {
+
+  // const {loginWithRedirect, logout, isAuthenticated} = useAuth0();
+
   return (
     <React.Fragment>
       <Router>
