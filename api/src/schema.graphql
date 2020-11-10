@@ -82,8 +82,7 @@ type User {
 
 type Mutation {
   photo(file: String, id: String, caption: String): Image
-}
-type Photo {
-  url: String
+  video(file: String, id: String, caption: String): Video
+  text(file: String, id: String, caption: String): Text
 }
 
