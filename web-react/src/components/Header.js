@@ -25,8 +25,8 @@ import { useQuery, gql, useMutation} from '@apollo/client'
 // `
 
 const MERGE_USER = gql`
-  mutation {
-  MergeUser(name:"Aditya Shah" email:"adi.shah0912@gmail.com", profileImg:"abc") {
+  mutation mergeUserMutation ($uname: String!, $uemail: String!, $uprofileImg: String) {
+  MergeUser(name:$uname email: $uemail, profileImg: $uprofileImg) {
     name
     email
     profileImg
@@ -43,6 +43,10 @@ const Header = () => {
   const {loginWithRedirect, logout, isAuthenticated, user} = useAuth0();
 
   // const [mergeUser] = useMutation(MergeUser);
+
+  const [createUser, { data, loading, error }] = useMutation(
+    MERGE_USER
+  )
   
 
   return (
@@ -122,17 +126,32 @@ const Header = () => {
           <Button color = "inherit" onClick={()=>{
             loginWithRedirect();
             // MergeUser({variables:{name: user.name, email: user.email}});
+
+            // createUser({ variables: { name: user.value, email: user.email, $profileImg: user.picture} });
+            // console.log(user);
+
             }} >
             Log In
           </Button>
-          
-
         }
 
         {
           isAuthenticated &&
           <Button color="inherit" onClick={()=>logout()}>
             Log Out
+          </Button>
+          // createUser({ variables: { name: user.value, email: user.email, $profileImg: user.picture} });
+          // console.log(user);
+
+        }
+
+        {
+          isAuthenticated &&
+          <Button color="inherit" onClick={()=>{
+            createUser({ variables: { uname: user.value, uemail: user.email, uprofileImg: user.picture} });
+            console.log(user);
+          }}>
+            NewUser
           </Button>
         }
         

@@ -68,12 +68,12 @@ type User {
    _id: Long!
    email: String!
    followers: String! @cypher(statement:"MATCH (this)<-[:follows]-(u:User) RETURN count(u)")
-   gender: String!
-   id: String!
+   # gender: String!
+   # id: String!
    name: String!
-   phonenumber: Int!
+   # phonenumber: Int!
    profileImg: String!
-   username: String!
+   # username: String!
    follows: [User] @relation(name: "follows", direction: "OUT")
    posted: [Post] @relation(name: "posted", direction: "OUT")
    commented: [Comment] @relation(name: "commented", direction: "OUT")
