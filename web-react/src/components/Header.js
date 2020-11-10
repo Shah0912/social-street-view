@@ -12,6 +12,17 @@ import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import {useAuth0} from '@auth0/auth0-react'
 import {Button} from '@material-ui/core'
+import { useQuery, gql, useMutation} from '@apollo/client'
+
+
+// const STORE_USER = gql`
+//   mutation MergeUser ($name:String!, $email: String!) {
+//   mergeUser(name: $name email: $email) {
+//     name
+//     email
+//   }
+// }
+// `
 
 
 
@@ -21,6 +32,8 @@ const Header = () => {
   }
 
   const {loginWithRedirect, logout, isAuthenticated, user} = useAuth0();
+
+  // const [mergeUser] = useMutation(MergeUser);
 
 
   return (
@@ -79,6 +92,7 @@ const Header = () => {
           {
             isAuthenticated &&
             <h4>{user.name}</h4>
+            
           }
         </div>
 
@@ -96,7 +110,10 @@ const Header = () => {
           <ArrowDropDownIcon />
         </IconButton> */}
         {!isAuthenticated &&
-          <Button color = "inherit" onClick={()=>loginWithRedirect()} >
+          <Button color = "inherit" onClick={()=>{
+            loginWithRedirect();
+            // MergeUser({variables:{name: user.name, email: user.email}});
+            }} >
             Log In
           </Button>
           

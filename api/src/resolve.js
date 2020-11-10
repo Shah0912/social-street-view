@@ -19,6 +19,7 @@ export const resolvers = {
     },
   },
 
+
   /* Query: {
     getImageUrl: (_, { imageName, transformOptions }) => {
       let result = ''
@@ -37,5 +38,5 @@ export const resolvers = {
       cloudinary.uploader.upload(file, uploadOptions),
   }, */
 }
-/* 
-module.exports = resolvers */
+
+// module.exports = resolvers;
