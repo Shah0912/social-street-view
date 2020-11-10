@@ -24,6 +24,15 @@ import { useQuery, gql, useMutation} from '@apollo/client'
 // }
 // `
 
+const MERGE_USER = gql`
+  mutation {
+  MergeUser(name:"Aditya Shah" email:"adi.shah0912@gmail.com", profileImg:"abc") {
+    name
+    email
+    profileImg
+  }
+}
+`
 
 
 const Header = () => {
@@ -34,7 +43,7 @@ const Header = () => {
   const {loginWithRedirect, logout, isAuthenticated, user} = useAuth0();
 
   // const [mergeUser] = useMutation(MergeUser);
-
+  
 
   return (
     <div className="header">
