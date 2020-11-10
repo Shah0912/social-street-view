@@ -66,9 +66,13 @@ const Header = () => {
           <h4>Aditya Shah</h4>
         </div>
 
-        <IconButton className="iconLeft">
-          <AddIcon />
-        </IconButton>
+
+        <Link to="/Upload">
+          <IconButton className="iconLeft">
+            <AddIcon />
+          </IconButton>
+        </Link>
+        
         <IconButton className="iconLeft">
           <NotificationsActiveIcon />
         </IconButton>

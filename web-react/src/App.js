@@ -19,7 +19,12 @@ export default function App() {
         <Route path="/street_view" component={Map} />
         <Route path="/profile" component={Profile} />
         <Route path="/sentiment" component={Sentiment} />
+<<<<<<< HEAD
         <Route path="/test" component={Test} />
+=======
+        <Route path="/upload" component={Upload} />
+        <Route path="/post" component={Ipost} />
+>>>>>>> cda8b70f7dd1c4601e0721a215f392fff0ecaee0
         {/* <Upload /> */}
         {/* <Ipost /> */}
       </Router>
