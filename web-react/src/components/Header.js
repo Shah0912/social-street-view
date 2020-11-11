@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import "./Header.css";
 import {Link} from 'react-router-dom'
 
@@ -25,15 +25,23 @@ import { useQuery, gql, useMutation} from '@apollo/client'
 // `
 
 const MERGE_USER = gql`
-  mutation mergeUserMutation ($uname: String!, $uemail: String!, $uprofileImg: String) {
-  MergeUser(name:$uname email: $uemail, profileImg: $uprofileImg) {
+  mutation mergeUserMutation ($name: String!, $email: String!, $profileImg: String!) {
+  MergeUser(name:$name, email: $email, profileImg: $profileImg) {
     name
     email
     profileImg
   }
 }
 `
-
+// const MERGE_USER = gql`
+//   mutation mergeUserMutation {
+//   MergeUser(name: "Aditya Shah", email: "adi.shah0912@gmail.com", profileImg: "abc") {
+//     name
+//     email
+//     profileImg
+//   }
+// }
+// `
 
 const Header = () => {
   const linkStyle = {
@@ -47,7 +55,12 @@ const Header = () => {
   const [createUser, { data, loading, error }] = useMutation(
     MERGE_USER
   )
+
+  const [Logged, setLogged] = useState(0);
   
+  const [Name, setName] = useState("");
+  const [Email, setEmail] = useState("");
+  const [PrfImg, setPrfImg] = useState("");
 
   return (
     <div className="header">
@@ -129,7 +142,10 @@ const Header = () => {
 
             // createUser({ variables: { name: user.value, email: user.email, $profileImg: user.picture} });
             // console.log(user);
-
+            setLogged(1);
+            setName(user.name);
+            setEmail(user.email);
+            setPrfImg(user.picture);
             }} >
             Log In
           </Button>
@@ -148,7 +164,9 @@ const Header = () => {
         {
           isAuthenticated &&
           <Button color="inherit" onClick={()=>{
-            createUser({ variables: { uname: user.value, uemail: user.email, uprofileImg: user.picture} });
+            console.log(user);
+            createUser({ variables: {name: user.name, email: user.email, profileImg: user.picture} });
+            // createUser();
             console.log(user);
           }}>
             NewUser

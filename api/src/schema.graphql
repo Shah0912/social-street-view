@@ -67,7 +67,7 @@ type District {
 type User {
    _id: Long!
    email: String!
-   followers: String! @cypher(statement:"MATCH (this)<-[:follows]-(u:User) RETURN count(u)")
+   followers: Int! @cypher(statement:"MATCH (this)<-[:follows]-(u:User) RETURN count(u)")
    # gender: String!
    # id: String!
    name: String!
