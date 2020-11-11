@@ -116,13 +116,14 @@ onChangeHandler=event=>{
         //console.log(res.data[0].lat);
         //console.log(res.data[0].lon);
         console.log(res.data[0]);
-
+        //************************************************************************************* */
         // CALL CLOUDINARY HERE
         // CALL GRAPHQL QUERY HERE
         // IMG LOCATION IS IN MAIN DIR: dataAcquisition/public/
         //filename: this.selectedFile.File.name
         //Timestamp: this.selectedFile.File.lastModified
 
+        //************************************************************************************ */
         return res.data[0];
       })
       .catch((error) => {
@@ -136,7 +137,7 @@ onChangeHandler=event=>{
 
 
 
-      
+
       // const lat = location.lat;
       // const lon = location.lon;
       // console.log(lat);
