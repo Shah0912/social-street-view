@@ -8,19 +8,22 @@ cloudinary.config({
 })
 
 export const resolvers = {
-  Query: {
-    /* photo: (user, args) => {
+         Mutation: {
+           /* photo: (user, args) => {
       let result = cloudinary.url(args.imageName)
       console.log(result)
     }, */
-    photo: async (_, { file }) => {
-      let res = await cloudinary.uploader.upload(file)
-      return { url: res.url }
-    },
-  },
+           photo: async (_, args) => {
+             let res = await cloudinary.uploader.upload(args.file)
+             return {
+               caption: args.caption,
+               id: args.id,
+               url: res.url,
+             }
+           },
+         },
 
-
-  /* Query: {
+         /* Query: {
     getImageUrl: (_, { imageName, transformOptions }) => {
       let result = ''
       if (transformOptions) {

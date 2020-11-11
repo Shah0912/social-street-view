@@ -9,7 +9,7 @@ import Upload from './components/data_aquisition/Upload'
 import Ipost from './components/individual_post/Ipost'
 import Sentiment from './components/sentiment/Sentiment'
 import {useAuth0} from '@auth0/auth0-react'
-
+import Test from './components/test'
 
 export default function App() {
 
@@ -23,6 +23,7 @@ export default function App() {
         <Route path="/street_view" component={Map} />
         <Route path="/profile" component={Profile} />
         <Route path="/sentiment" component={Sentiment} />
+        <Route path="/test" component={Test} />
         <Route path="/upload" component={Upload} />
         <Route path="/post" component={Ipost} />
         {/* <Upload /> */}
