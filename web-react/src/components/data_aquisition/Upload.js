@@ -4,6 +4,7 @@ import axios from 'axios';
 import {Progress} from 'reactstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+// const axios = require("axios").default;
 
 
 import "./Upload.css"
@@ -91,11 +92,69 @@ onChangeHandler=event=>{
     })
       .then(res => { // then print response status
         toast.success('upload success')
+        console.log(this);
+
+
+
+
+
+
+
+        let locality = this.state.Location;
+        let State = this.state.State;
+        let url =
+        "https://us1.locationiq.com/v1/search.php?key=b63d71d9d444f7&q=" +
+        locality.split(" ").join("%20") +
+        ",%20" +
+        State.split(" ").join("%20") +
+        ",%20" +
+        "India&format=json";
+      console.log(url);
+      const location = axios
+      .get(url)
+      .then((res) => {
+        //console.log(res.data[0].lat);
+        //console.log(res.data[0].lon);
+        console.log(res.data[0]);
+
+        // CALL CLOUDINARY HERE
+        // CALL GRAPHQL QUERY HERE
+        // IMG LOCATION IS IN MAIN DIR: dataAcquisition/public/
+        //filename: this.selectedFile.File.name
+        //Timestamp: this.selectedFile.File.lastModified
+
+        return res.data[0];
+      })
+      .catch((error) => {
+        console.error(error.message);
+      });
+
+
+
+
+
+
+
+
+      
+      // const lat = location.lat;
+      // const lon = location.lon;
+      // console.log(lat);
+      // console.log(lon);
       })
       .catch(err => { // then print response status
         console.log(err);
         toast.error('upload fail')
       })
+    }
+
+
+    handleStateChange = (e) => {
+      this.setState({State: e.target.value});
+    }
+
+    handleLocationChange = (e) => {
+      this.setState({Location: e.target.value});
     }
 
   render() {
@@ -105,6 +164,8 @@ onChangeHandler=event=>{
       	  <div class="offset-md-3 col-md-6">
                <div class="form-group files">
                 <label className="Upload-header">Upload Your File </label>
+                <input type="text" placeholder="Location" value={this.state.Location} onChange={this.handleLocationChange}/>
+                <input type="text" placeholder="State" value={this.state.State} onChange={this.handleStateChange}/>
                 <input type="file" className= "fileInput" multiple onChange={this.onChangeHandler}/>
               </div>  
               <div class="form-group" className= "fileInput">
