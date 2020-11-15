@@ -1,10 +1,10 @@
 type Post {
    _id: Long!
    id: String!
-   latitude: String!
+   latitude: String
    likes: String! @cypher(statement:"MATCH (this)<-[:likes]-(u:User) RETURN count(u)")
-   longitude: String!
-   tags: String!
+   longitude: String
+   tags: String
    timestamp: String!
    users_posted: [User] @relation(name: "posted", direction: "IN")
    comments_on: [Comment] @relation(name: "on", direction: "IN")
@@ -16,24 +16,24 @@ type Post {
 
 type Image {
    _id: Long!
-   caption: String!
    id: String!
+   caption: String!
    url: String!
    posts: [Post] @relation(name: "has", direction: "IN")
 }
 
 type Video {
    _id: Long!
-   caption: String!
    id: String!
+   caption: String!
    url: String!
    posts: [Post] @relation(name: "has", direction: "IN")
 }
 
 type Text {
    _id: Long!
-   data: String!
    id: String!
+   data: String!
    posts: [Post] @relation(name: "has", direction: "IN")
 }
 

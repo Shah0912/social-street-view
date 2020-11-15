@@ -4,12 +4,34 @@ import axios from 'axios';
 import {Progress} from 'reactstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// const axios = require("axios").default;
-
+import { useQuery, gql, useMutation} from '@apollo/client';
+const { v4: uuidv4 } = require('uuid');
 
 import "./Upload.css"
 
-
+//Add mutation for relation user->Post
+const ADDIMAGE = gql`
+  mutation addImage($Pid: String!, $Ptime: String!, $tags: String, $latitude: String, $longitude: String, $Iid: String!, $caption: String!, $url: String!) {
+    CreatePost(id:$Pid, timestamp: $Ptime, tags: $tags, latitude: $latitude, longitude: $longitude) {
+    id
+    timestamp
+    }
+    CreateImage (caption: $caption, id: $Iid, url: $url) {
+      id
+      caption
+    }
+    AddPostHas_image(from:{id: $Pid} to: {id: $Iid}) {
+      from {
+        id
+        tags
+      }
+      to {
+        caption
+        id
+      }
+    }
+  }
+`
 
 class Upload extends Component {
   constructor(props) {
@@ -124,6 +146,18 @@ onChangeHandler=event=>{
         //Timestamp: this.selectedFile.File.lastModified
 
         //************************************************************************************ */
+        let Pid = uuid();
+        let Iid = uuid();
+        let Ptime = this.selectedFile.File.lastModified;
+        let tags = this.setState.tags;
+        let latitude = this.setState.latitude; 
+        let longitude = this.setState.longitude;
+        let caption = this.setState.caption;
+        
+        //Add cloudinary URL in this
+        let url = "abc";
+
+        
         return res.data[0];
       })
       .catch((error) => {
@@ -158,6 +192,14 @@ onChangeHandler=event=>{
       this.setState({Location: e.target.value});
     }
 
+    handleTagChange = (e) => {
+      this.setState({Tag: e.target.value});
+    }
+
+    handleCaptionChange = (e) => {
+      this.setState({Caption: e.target.value});
+    }
+
   render() {
     return (
       <div class="container" className="Upload">
@@ -168,6 +210,8 @@ onChangeHandler=event=>{
                 <input type="text" placeholder="Location" value={this.state.Location} onChange={this.handleLocationChange}/>
                 <input type="text" placeholder="State" value={this.state.State} onChange={this.handleStateChange}/>
                 <input type="file" className= "fileInput" multiple onChange={this.onChangeHandler}/>
+                <input type="text" placeholder="tags" value={this.state.Tag} onChange={this.handleTagChange} />
+                <input type="text" placeholder="caption" value={this.state.Caption} onChange={this.handleCaptionChange} />
               </div>  
               <div class="form-group" className= "fileInput">
               <ToastContainer />
