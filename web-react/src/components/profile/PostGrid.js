@@ -6,29 +6,73 @@ import { useQuery, gql } from '@apollo/client'
 //import withWidth, { isWidthUp } from '@material-ui/core/withWidth'
 
 const GET_DATA_QUERY = gql`
+  query getPost($email:String!){
+  User(email:$email)
   {
-    User(name: "Aditya Shah") {
-      posted {
-        has_image {
-          url
-        }
+    posted
+    {
+      has_image
+      {
+        url
+      },
+      has_video
+      {
+        url
+      },
+      has_text
+      {
+        url
       }
     }
   }
+}
 `
 
 function PostGrid(props) {
-  const { loading, error, data } = useQuery(GET_DATA_QUERY)
+  const { loading, error, data } = useQuery(GET_DATA_QUERY,{variables:{email:"adi@gmail.com"}})
   if (error) return <p>Error</p>
   if (loading) return <p>Loading</p>
 
-  console.log(data.User[0].posted[1].has_image[0].url)
-  const url = data.User[0].posted[1].has_image[0].url
+  //const url = data.User[0].posted[1].has_image[0].url
   /*     'https://images.unsplash.com/photo-1495615080073-6b89c9839ce0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=822&q=80'
    */
+  const posts = data.User[0].posted.map(post => {
+    if(post.has_image.length)
+    {
+      const url = post.has_image[0].url
+      return(
+        <GridListTile style={{ height: '100%' }}>
+        <img src={url} alt="f" style={{ width: '100%' }} />
+      </GridListTile>
+      )
+    }
+    if(post.has_video.length)
+    {
+      const url = post.has_video[0].url
+      return(
+        <GridListTile style={{ height: '100%' }}>
+        <img src={url} alt="f" style={{ width: '100%' }} />
+      </GridListTile>
+      )
+    }
+    if(post.has_text.length)
+    {
+      const url = post.has_text[0].url
+      return(
+        <GridListTile style={{ height: '100%' }}>
+        <img src={url} alt="f" style={{ width: '100%' }} />
+      </GridListTile>
+      )
+    }
+    console.log(post)
+  })
   return (
     <GridList cellHeight={293} cols={3} style={{ justifyContent: 'center' }}>
-      <GridListTile style={{ height: '100%' }}>
+      {posts}
+      {/* <GridListTile style={{ height: '100%' }}>
+        <img src={url} alt="f" style={{ width: '100%' }} />
+      </GridListTile> */
+      /* <GridListTile style={{ height: '100%' }}>
         <img src={url} alt="f" style={{ width: '100%' }} />
       </GridListTile>
       <GridListTile style={{ height: '100%' }}>
@@ -96,10 +140,7 @@ function PostGrid(props) {
       </GridListTile>
       <GridListTile style={{ height: '100%' }}>
         <img src={url} alt="f" style={{ width: '100%' }} />
-      </GridListTile>
-      <GridListTile style={{ height: '100%' }}>
-        <img src={url} alt="f" style={{ width: '100%' }} />
-      </GridListTile>
+      </GridListTile> */}
     </GridList>
   )
 }

@@ -30,6 +30,7 @@
     "react-toastify": "^6.0.9",
     "reactstrap": "^8.6.0",
     "recharts": "^1.8.5",
+    "sentiment": "^5.0.2",
     "swr": "^0.3.6",
     "use-supercluster": "^0.2.9"
   },
