@@ -8,20 +8,24 @@ cloudinary.config({
 })
 
 export const resolvers = {
-         Mutation: {
-           /* photo: (user, args) => {
-      let result = cloudinary.url(args.imageName)
-      console.log(result)
-    }, */
-           photo: async (_, args) => {
-             let res = await cloudinary.uploader.upload(args.file)
-             return {
-               caption: args.caption,
-               id: args.id,
-               url: res.url,
-             }
-           },
-         },
+        Mutation: {
+                  /* photo: (user, args) => {
+            let result = cloudinary.url(args.imageName)
+            console.log(result)
+          }, */
+          photo: async (_, args) => {
+            let res = await cloudinary.uploader.upload(args.file)
+            return {
+              caption: args.caption,
+              id: args.id,
+              url: res.url,
+            }
+          },
+
+          uploadImage: (_, {file, uploadOptions}) => cloudinary.uploader.upload(file, uploadOptions)
+          
+
+        },
 
          /* Query: {
     getImageUrl: (_, { imageName, transformOptions }) => {
@@ -41,5 +45,22 @@ export const resolvers = {
       cloudinary.uploader.upload(file, uploadOptions),
   }, */
 }
+
+// module.exports = resolvers;
+
+
+// const cloudinary = require('cloudinary').v2;
+
+// cloudinary.config({
+//   cloud_name: process.env.CLOUD_NAME,
+//   api_key: process.env.API_KEY,
+//   api_secret: process.env.API_SECRET
+// })
+
+// const resolvers = {
+//   Mutation: {
+//     uploadImage: (_, { file, uploadOptions }) => cloudinary.uploader.upload(file, uploadOptions)
+//   }
+// };
 
 // module.exports = resolvers;
