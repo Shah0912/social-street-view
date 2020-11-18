@@ -6,8 +6,9 @@ import NearMeIcon from '@material-ui/icons/NearMe';
 import Comment from '../individual_post/Comment'
 
 import "./Post.css"
+import Icomment from '../individual_post/Icomment';
 
-function Post({username, profileImg, imgSrc, caption}) {
+function Post({username, profileImg, imgSrc, caption, id}) {
     return (
         <div className="post">
 
@@ -46,17 +47,17 @@ function Post({username, profileImg, imgSrc, caption}) {
                 <h2>Comments</h2>
                 <Comment />
                 <div className="Comment">
-                    <Avatar 
-                        // className="postAvatar"
-                        // alt = {username}
-                        // src = {profileImg}
-                        // alt={username}
+                    {/* <Avatar 
+                        className="postAvatar"
+                        alt = {username}
+                        src = {profileImg}
+                        alt={username}
                         alt="AdityaShah"
                         src="https://images.alphacoders.com/711/thumb-350-711581.jpg"
                     />
-                    {/* <h3>{username} : </h3> */}
                     <h3>Sarang Shekokar : </h3>
-                    <p>This is a comment</p>
+                    <p>This is a comment</p> */}
+                    <Icomment username = "Sarang Shekokar" cmt = "This is a comment" profileImg = "https://images.alphacoders.com/711/thumb-350-711581.jpg"/>
                 </div>
                 
             </div>

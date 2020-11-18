@@ -4,6 +4,7 @@ import CommentIcon from '@material-ui/icons/Comment';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import NearMeIcon from '@material-ui/icons/NearMe';
 import Comment from './Comment';
+import Icomment from './Icomment';
 
 
 import "./Ipost.css"
@@ -53,17 +54,17 @@ function Ipost() {
                 <h2>Comments</h2>
                 <Comment />
                 <div className="comment">
-                    <Avatar 
-                        // className="ipostAvatar"
-                        // alt = {username}
-                        // src = {profileImg}
-                        // alt={username}
+                    {/* <Avatar 
+                        className="ipostAvatar"
+                        alt = {username}
+                        src = {profileImg}
+                        alt={username}
                         alt="AdityaShah"
                         src="https://images.alphacoders.com/711/thumb-350-711581.jpg"
                     />
-                    {/* <h3>{username} : </h3> */}
                     <h3>Sarang Shekokar : </h3>
-                    <p>This is a comment</p>
+                    <p>This is a comment</p> */}
+                    <Icomment username={"Sarang Shekokar"} cmt={"This is a comment"} profileImg = {"https://images.alphacoders.com/711/thumb-350-711581.jpg"}/> 
                 </div>
                 
             </div>
