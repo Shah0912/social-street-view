@@ -24,13 +24,13 @@ const UPLOAD_IMAGE_TO_CLOUDINARY = gql`
 
 const ADDIMAGE = gql`
   mutation addImage($Pid: String!, $Ptime: String!, $tags: String, $latitude: String, $longitude: String, $Iid: String!, $caption: String!, $url: String!, $email: String!) {
-    CreatePost(id:$Pid, timestamp: $Ptime, tags: $tags, latitude: $latitude, longitude: $longitude) {
+    CreatePost(id:$Pid, tags: $tags, latitude: $latitude, longitude: $longitude) {
       id
-      timestamp
     }
-    CreateImage (caption: $caption, id: $Iid, url: $url) {
+    CreateImage (caption: $caption, id: $Iid, url: $url, timestamp: $Ptime) {
       id
       caption
+      timestamp
     }
     AddPostHas_image(from:{id: $Pid} to: {id: $Iid}) {
       from {
