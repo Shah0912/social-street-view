@@ -1,67 +1,40 @@
-import React, { useState, useRef,useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import useSwr from 'swr'
 import ReactMapGL, {GeolocateControl, Marker, FlyToInterpolator, Popup } from 'react-map-gl'
 import useSuperCluster from 'use-supercluster'
 import ImageRoundedIcon from '@material-ui/icons/ImageRounded'
 import { Button, Container,Paper } from '@material-ui/core'
-import { gql, useQuery } from '@apollo/client'
 
 const fetcher = (...args) => fetch(...args).then((response) => response.json())
-const GET_DATA_QUERY = gql`
-  query mapget 
-{
-  Post
-  {
-    id,
-    latitude,
-    longitude,
-    has_image
-    {
-      url
-    }
-  }
-}
-`
 
 export default function Map() {
-  const { loading, error, data } = useQuery(GET_DATA_QUERY)
-  const [Data,setData] = useState({
-    Post:[{
-      latitude:"",
-      longitude:"",
-      url:[]
-    }]
-  })
-  useEffect(() => {
-    if(loading == false && data) {
-        setData(data);
-    }
-}, [loading, data]);
+  const url =
+    'https://data.police.uk/api/crimes-street/all-crime?lat=52.629729&lng=-1.131592&date=2019-10'
 
+  const { data, error } = useSwr(url, fetcher)
+  const crimes = data && !error ? data.slice(0, 2000) : []
   const [viewport, setViewport] = useState({
-    latitude: 19.05884593854442,
-    longitude: 72.90418657347465,
+    latitude: 52.6376,
+    longitude: -1.135171,
     zoom: 12,
     transitionInterpolator: new FlyToInterpolator({
       speed: 2,
     }),
     transitionDuration: 'auto',
   })
-  let crimes = Data.Post
-  const points = crimes.map((crime) => (
-    {
+  const points = crimes.map((crime) => ({
     type: 'Feature',
     properties: {
       cluster: false,
       crimeId: crime.id,
-      url: crime.has_image,
+      category: crime.category,
     },
     geometry: {
       type: 'Point',
       coordinates: [
-        parseFloat(crime.longitude),
-        parseFloat(crime.latitude),
-      ]
+        parseFloat(crime.location.longitude),
+        parseFloat(crime.location.latitude),
+      ],
     },
   }))
   const mapRef = useRef()
@@ -96,10 +69,6 @@ export default function Map() {
 
         {clusters.map((cluster) => {
           const [longitude, latitude] = cluster.geometry.coordinates
-          //let url=""
-          console.log(cluster.properties.crimeid)
-          //let url = cluster.geometry.url.length ? cluster.geometry.url[0].url : "";
-            //console.log(url)
           const {
             cluster: isCluster,
             point_count: pointCount,
@@ -162,12 +131,11 @@ export default function Map() {
                   //onClose={() => this.setState({showPopup: false})}
                   //anchor="top"
                 >
-                  
                   <Paper
                     children={
                       <img
                         style={{ width: '100px' }}
-                        src={cluster.properties.url.length?cluster.properties.url[0].url : ""}//"https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg"
+                        src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg"
                       />
                     }
                     square={true}
