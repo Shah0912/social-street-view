@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState, useEffect} from "react";
 import "./Header.css";
 import {Link} from 'react-router-dom'
 
@@ -61,6 +61,14 @@ const Header = () => {
   const [Name, setName] = useState("");
   const [Email, setEmail] = useState("");
   const [PrfImg, setPrfImg] = useState("");
+
+
+  useEffect(() => {
+    if(isAuthenticated == true) {
+      createUser({ variables: {name: user.name, email: user.email, profileImg: user.picture} });
+      console.log("executed query");
+    }
+}, [isAuthenticated]);
 
   return (
     <div className="header">
@@ -155,13 +163,11 @@ const Header = () => {
           isAuthenticated &&
           <Button color="inherit" onClick={()=>logout()}>
             Log Out
-          </Button>
+          </Button> 
           // createUser({ variables: { name: user.value, email: user.email, $profileImg: user.picture} });
-          // console.log(user);
-
         }
 
-        {
+        {/* {
           isAuthenticated &&
           <Button color="inherit" onClick={()=>{
             console.log(user);
@@ -171,7 +177,7 @@ const Header = () => {
           }}>
             NewUser
           </Button>
-        }
+        } */}
         
       </div>
     </div>
