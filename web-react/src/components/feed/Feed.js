@@ -17,10 +17,10 @@ const GET_POSTS = gql`
             profileImg
             posted {
                 # has_video
-                has_image (orderBy:timestamp_desc) {
+                has_image {
                     id
                     caption
-                    timestamp
+                    
                     url
                 }
             }
