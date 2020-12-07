@@ -80,12 +80,14 @@ console.log(Data);
         return (
             <div className="storyReel">
                 {
+                    // console.log("storyReel data = ", Data) &&
                     // Data.map((user)=>(
-                    //     console.log(user)
+                    //     console.log(user.posted)
                     // ))
                     // console.log("Data = ", Data)
                     Data.User.map((user) => (
-                        <Story profileSrc={user.profileImg} image={user.posted[0].has_image[0].url} title={user.posted[0].has_image[0].caption} /> 
+                        // console.log("story", user) 
+                        (!!user.posted[0]) && <Story profileSrc={user.profileImg} image={user.posted[0].has_image[0].url} title={user.posted[0].has_image[0].caption} /> 
                     ))
                 }
 

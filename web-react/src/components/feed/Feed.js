@@ -73,8 +73,10 @@ if(Data)
                 // ))
             }
             {
+                // console.log("Feed data", Data.User[0].posted[0].has_image) && 
                 Data.User.map((user) => (
-                    user.posted[0].has_image.map((post)=>(
+                    // console.log("feed user", user.posted[0])
+                    (!!user.posted[0] ) && user.posted[0].has_image.map((post)=>(
                         <Post username={user.name} caption={post.caption} imgSrc={post.url} profileImg ={user.profileImg} id = {post.id}/>
                     ))
                 ))   
