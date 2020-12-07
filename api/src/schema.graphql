@@ -6,8 +6,6 @@ type Post {
    longitude: String
    tags: String
    users_posted: [User] @relation(name: "posted", direction: "IN")
-   comments_on: [Comment] @relation(name: "on", direction: "IN")
-   users_likes: [User] @relation(name: "likes", direction: "IN")
    has_image: [Image] @relation(name:"has",direction: "OUT")
    has_video: [Video] @relation(name:"has",direction: "OUT")
    has_text: [Image] @relation(name:"has",direction: "OUT")
@@ -20,6 +18,8 @@ type Image {
    url: String!
    timestamp: String!
    posts: [Post] @relation(name: "has", direction: "IN")
+   users_likes: [User] @relation(name: "likes", direction: "IN")
+   comments_on: [Comment] @relation(name: "on", direction: "IN")
 }
 
 type Video {
@@ -42,10 +42,12 @@ type Text {
 type Comment {
    _id: Long!
    id: String!
-   sentiment: Int!
+   sentiment: Int
    text: String!
+   latitude: String
+   longitude: String
    timestamp: String!
-   on: [Post] @relation(name: "on", direction: "OUT")
+   on: [Image] @relation(name: "on", direction: "OUT")
    users: [User] @relation(name: "commented", direction: "IN")
 }
 
@@ -79,7 +81,7 @@ type User {
    follows: [User] @relation(name: "follows", direction: "OUT")
    posted: [Post] @relation(name: "posted", direction: "OUT")
    commented: [Comment] @relation(name: "commented", direction: "OUT")
-   likes: [Post] @relation(name: "likes", direction: "OUT")
+   likes: [Image] @relation(name: "likes", direction: "OUT")
 }
 
 input TransformImageOptionsInput {
