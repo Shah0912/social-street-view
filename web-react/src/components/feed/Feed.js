@@ -44,7 +44,7 @@ function Feed() {
 
     if (loading) return 'Loading...';
     if (error) return `Error! ${error.message}`;
-    console.log("Data = ", data);
+    // console.log("Data = ", data); 
 
 
     // const [posts, setPosts] = useState([

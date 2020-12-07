@@ -7,6 +7,14 @@
     border: solid yellow    ;
 }
 
+.heading {
+  /* color: #2e81f4; */
+  font-size: larger;
+  justify-content: center;
+  font-weight: bolder;
+  padding: 5px;
+}
+
 /* @media (max-width:500px) {
     .sidebar {
       display: none;

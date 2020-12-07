@@ -154,4 +154,11 @@ type Mutation {
 
 type Query {
    getImageUrl(imageName: String!, transformOptions: TransformImageOptionsInput): ImageUrl!
+   getSuggestions(email: String!) : [User] 
+   # @isAuthenticated 
+   @cypher(statement: """
+      MATCH (u: User{email: $email}) - [:follows] -> (f:User) - [:follows] -> (ans: User)
+      WHERE(u.email <> ans.email)
+      RETURN ans;
+   """)
 }
