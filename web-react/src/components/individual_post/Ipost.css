@@ -95,7 +95,7 @@
 } */
 
 .comment {
-    display: flex;
+    /* display: flex; */
     /* border: solid yellow; */
     align-items: center;
     margin-left: 15px;

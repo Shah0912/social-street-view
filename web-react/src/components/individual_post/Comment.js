@@ -52,21 +52,29 @@ function Comment({id, email}) {
         setCom(e.target.value);
     }
 
-    function onSubmit(Com, id, email) {
-        let Ctime = new Date();
-        let Cid = uuidv4();
+    useEffect(()=>{
         navigator.geolocation.getCurrentPosition((position)=>{
             console.log("position = ", position);
             setlat(position.coords.latitude);
             setlon(position.coords.longitude);
         })
+    },[])
+
+    function onSubmit(Com, id, email) {
+        let Ctime = new Date();
+        let Cid = uuidv4();
+        // navigator.geolocation.getCurrentPosition((position)=>{
+        //     console.log("position = ", position);
+        //     setlat(position.coords.latitude);
+        //     setlon(position.coords.longitude);
+        // })
         addComment({
             variables: {
                 Cid: Cid, 
                 Com: Com, 
                 Ctime: Ctime,
-                lat: lat,
-                lon: lon,
+                lat: lat.toString(),
+                lon: lon.toString(),
                 Iid: id,
                 email: email
             }
