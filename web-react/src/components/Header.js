@@ -67,6 +67,7 @@ const Header = () => {
     if(isAuthenticated == true) {
       createUser({ variables: {name: user.name, email: user.email, profileImg: user.picture} });
       console.log("executed query");
+      setEmail(user.email);
     }
 }, [isAuthenticated]);
 
@@ -113,7 +114,13 @@ const Header = () => {
           style={{ maxHeight: '40px', justifyContent: 'center' }}
         >
 
-          <Link to="/profile">
+          {/* <Link to="/profile" > */}
+          <Link to = {{
+            pathname: "/profile",
+            state: {
+              email: {Email}
+            }
+          }} >
             <IconButton alignItems="center">
               {
                 isAuthenticated &&

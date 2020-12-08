@@ -3,12 +3,15 @@ import { GridList, GridListTile, Grid } from '@material-ui/core'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { useTheme } from '@material-ui/core/styles'
 import { useQuery, gql } from '@apollo/client'
+import {useAuth0} from '@auth0/auth0-react'
+
 //import withWidth, { isWidthUp } from '@material-ui/core/withWidth'
 
 const GET_DATA_QUERY = gql`
   query getPost($email:String!){
   User(email:$email)
   {
+
     posted
     {
       has_image
@@ -28,8 +31,10 @@ const GET_DATA_QUERY = gql`
 }
 `
 
-function PostGrid(props) {
-  const { loading, error, data } = useQuery(GET_DATA_QUERY,{variables:{email:"adi@gmail.com"}})
+function PostGrid({email}) {
+  const {isAuthenticated, user} = useAuth0();
+  console.log("{email} = ",{email}, "email = ", email);
+  const { loading, error, data } = useQuery(GET_DATA_QUERY,{variables:{email:"adi.shah0912@gmail.com"}});
   if (error) return <p>Error</p>
   if (loading) return <p>Loading</p>
 

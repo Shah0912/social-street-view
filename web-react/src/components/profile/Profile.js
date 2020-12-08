@@ -2,11 +2,22 @@ import React from 'react'
 import PostGrid from './PostGrid'
 import Details from './Details'
 import { Container } from '@material-ui/core'
-function Profile() {
+import {useAuth0} from '@auth0/auth0-react'
+
+
+function Profile(props) {
+
+  console.log("Profile props", props);
+  const {isAuthenticated, user} = useAuth0();
+  if(!isAuthenticated) {
+    return (
+      <div>Sign in to continue</div>
+    )
+  }
   return (
     <div>
       <Container maxWidth="md">
-        <Details />
+        <Details email={props.location.state.email}/>
                                 {/* 
         <div
           style={{
@@ -15,7 +26,7 @@ function Profile() {
             
           }}
         ></div> */}
-        <PostGrid />
+        <PostGrid email={props.location.state.email}/>
       </Container>
     </div>
   )
