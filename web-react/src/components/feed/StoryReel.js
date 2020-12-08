@@ -87,7 +87,7 @@ console.log(Data);
                     // console.log("Data = ", Data)
                     Data.User.map((user) => (
                         // console.log("story", user) 
-                        (!!user.posted[0]) && <Story profileSrc={user.profileImg} image={user.posted[0].has_image[0].url} title={user.posted[0].has_image[0].caption} /> 
+                        (!!user.posted[0]) && <Story profileSrc={user.profileImg} image={user.posted[0].has_image[0].url} title={user.posted[0].has_image[0].caption} id={user.posted[0].has_image[0].id} /> 
                     ))
                 }
 

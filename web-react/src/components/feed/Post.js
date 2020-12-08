@@ -65,10 +65,11 @@ function Post({username, profileImg, imgSrc, caption, id}) {
     }
 
 
-    function handleClick(id) {
+    function handleClick() {
+        console.log(id);
         history.push({
             pathname:'/post',
-            data: {id}
+            data: id
         });
     }
 
