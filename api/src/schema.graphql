@@ -45,6 +45,7 @@ type Comment {
    sentiment: Int!
    text: String!
    timestamp: String!
+   dist_id: Int!
    on: [Post] @relation(name: "on", direction: "OUT")
    users: [User] @relation(name: "commented", direction: "IN")
 }
@@ -60,6 +61,7 @@ type District {
    name_0: String!
    name_1: String!
    name_2: String!
+   polygon: [Point]!
    pop: Int!
    pop_prop_2011: String!
    type_2: String!
