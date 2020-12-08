@@ -43,6 +43,7 @@ type Comment {
    _id: Long!
    id: String!
    sentiment: Int
+   dist_id: Int @cypher(statement:"MATCH (d:District),(this) WHERE EXISTS(d.polygon) AND spatial.algo.withinPolygon(Point({latitude:toFloat(this.latitude), longitude:toFloat(this.longitude)}),d.polygon) RETURN (d.cartodb_id)")
    text: String!
    latitude: String
    longitude: String

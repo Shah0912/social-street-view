@@ -6,7 +6,7 @@ import { useQuery, gql } from '@apollo/client'
 
 const GET_DATA_QUERY = gql`
   query($id: String!) {
-    Post(id: $id) {
+    Image(id: $id) {
       comments_on {
         dist_id
         sentiment
@@ -17,19 +17,19 @@ const GET_DATA_QUERY = gql`
 
 function Sentiment() {
   const { loading, error, data } = useQuery(GET_DATA_QUERY, {
-    variables: { id: 'b' },
+    variables: { id: 'cc8255b8-00e8-4189-b73d-fb7e6def30bb' },
   })
   const [Data, setData] = useState([])
   useEffect(() => {
     if (loading == false && data) {
-      setData(data.Post[0].comments_on)
+      setData(data.Image[0].comments_on)
     }
   }, [loading, data])
   //console.log(data1.features[0].geometry.coordinates)
   //console.log(Data)
   data1.features.map((feature) => {
     Data.map((comment) => {
-      feature.properties.sentiment = 2
+      feature.properties.sentiment = -6
       if (comment.dist_id === feature.properties.cartodb_id) {
         feature.properties.sentiment = comment.sentiment
       }
@@ -77,6 +77,7 @@ function Sentiment() {
               'fill-color': {
                 property: 'sentiment',
                 stops: [
+                  [-6, '#636363'],
                   [-5, '#ff0000'],
                   [-4, '#ff3300'],
                   [-3, '#ff6600'],
@@ -120,10 +121,10 @@ function Sentiment() {
               pointerEvents: 'none',
             }}
           >
-            <div>Sentiment: {hover.hoveredFeature.properties.sentiment}</div>
+            <div>Sentiment: {hover.hoveredFeature.properties.sentiment < -5 ? "N/A" : hover.hoveredFeature.properties.sentiment}</div>
             <div>State: {hover.hoveredFeature.properties.name_1}</div>
             <div>District: {hover.hoveredFeature.properties.name_2}</div>
-            
+
             {/* <div>Population: {hover.hoveredFeature.properties.pop}</div> */}
           </div>
         )}
