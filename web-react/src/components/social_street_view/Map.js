@@ -5,25 +5,25 @@ import useSuperCluster from 'use-supercluster'
 import ImageRoundedIcon from '@material-ui/icons/ImageRounded'
 import { Button, Container,Paper } from '@material-ui/core'
 import { gql, useQuery } from '@apollo/client'
+import { useHistory } from 'react-router-dom'
 
 const fetcher = (...args) => fetch(...args).then((response) => response.json())
 const GET_DATA_QUERY = gql`
-  query mapget 
-{
-  Post
-  {
-    id,
-    latitude,
-    longitude,
-    has_image
-    {
-      url
+  query mapget {
+    Post {
+      id
+      latitude
+      longitude
+      has_image {
+        url
+        id
+      }
     }
   }
-}
 `
 
 export default function Map() {
+  const history = useHistory()
   const { loading, error, data } = useQuery(GET_DATA_QUERY)
   const [Data,setData] = useState({
     Post:[{
@@ -48,8 +48,7 @@ export default function Map() {
     transitionDuration: 'auto',
   })
   let crimes = Data.Post
-  const points = crimes.map((crime) => (
-    {
+  const points = crimes.map((crime) => ({
     type: 'Feature',
     properties: {
       cluster: false,
@@ -58,10 +57,7 @@ export default function Map() {
     },
     geometry: {
       type: 'Point',
-      coordinates: [
-        parseFloat(crime.longitude),
-        parseFloat(crime.latitude),
-      ]
+      coordinates: [parseFloat(crime.longitude), parseFloat(crime.latitude)],
     },
   }))
   const mapRef = useRef()
@@ -76,6 +72,7 @@ export default function Map() {
   })
 
   const [showPopup, setShowPopup] = useState(0)
+  const [popupID, setPopupID] = useState(0)
 
   return (
     <Container maxWidth="lg">
@@ -149,6 +146,15 @@ export default function Map() {
             )
           }
 
+          
+          function handleClick() {
+            console.log(popupID)
+            const id = popupID
+            history.push({
+              pathname: '/post',
+              data: id,
+            })
+          }
           return (
             <React.Fragment>
               {showPopup === cluster.properties.crimeId && (
@@ -162,12 +168,15 @@ export default function Map() {
                   //onClose={() => this.setState({showPopup: false})}
                   //anchor="top"
                 >
-                  
                   <Paper
                     children={
                       <img
                         style={{ width: '100px' }}
-                        src={cluster.properties.url.length?cluster.properties.url[0].url : ""}//"https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg"
+                        src={
+                          cluster.properties.url.length
+                            ? cluster.properties.url[0].url
+                            : ''
+                        } //"https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg"
                       />
                     }
                     square={true}
@@ -183,11 +192,14 @@ export default function Map() {
                   color="primary"
                   onMouseEnter={() => {
                     setShowPopup(cluster.properties.crimeId)
+                    setPopupID(cluster.properties.url[0].id)
                   }}
                   onMouseLeave={() => {
                     setShowPopup(0)
+                    setPopupID(0)
                     console.log(showPopup)
                   }}
+                  onClick={handleClick}
                   style={{ alignItems: 'center', justifyContent: 'center' }}
                 >
                   <ImageRoundedIcon fontSize="medium" />

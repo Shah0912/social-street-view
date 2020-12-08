@@ -39,7 +39,8 @@ const GET_POST = gql `
 `
 
 function Ipost(id) {
-
+    console.log('HERE')
+    console.log(id)
     const {isAuthenticated, user} = useAuth0();
     // console.log("id = ", id.location.data   );
     // console.log("id = .. ", id);
