@@ -1,0 +1,14 @@
+.icom {
+    display: flex;
+    align-items: center;
+    /* padding: 15px; */
+}
+
+.icom > p {
+    /* padding-left: 20px; */
+    margin-left: 5px;
+}
+
+.icom > h4 {
+    margin-left: 5px;
+}

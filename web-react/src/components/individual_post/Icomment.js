@@ -1,12 +1,14 @@
 import { Avatar } from '@material-ui/core'
 import React from 'react'
 
+import "./Icomment.css";
+
 function Icomment({username, profileImg, cmt}) {
     return (
-        <div className="comment">
+        <div className="icom">
             <Avatar alt = {username} src = {profileImg}/>
-            <h3>{username} : </h3>
-            <p>{cmt}</p>
+            <h4>{username} : </h4>
+            <p>  {cmt}</p>
         </div>
     )
 }

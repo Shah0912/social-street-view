@@ -183,7 +183,7 @@ export default function UploadImageForm(props) {
       <input type="text" placeholder="State" onChange={e=>handleChangeS(e)}/>
       <input type="text" placeholder="tags" onChange={e=>handleChangeT(e)} />
       <input type="text" placeholder="caption" onChange={e=>handleChangeC(e)} />
-      {isAuthenticated &&
+      {isAuthenticated && !!fileToUpload &&
         <button onClick={() => onSubmit(fileToUpload, uploadOptions)}> Upload Photo</button>
       }
     </div>
