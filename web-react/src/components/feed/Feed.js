@@ -78,7 +78,7 @@ if(Data)
                     // console.log("feed user", user.posted[0])
                     (!!user.posted[0] ) && user.posted[0].has_image.map((post)=>(
                         // console.log("post = ", post) &&
-                        <Post username={user.name} caption={post.caption} imgSrc={post.url} profileImg ={user.profileImg} id = {post.id}/>
+                        <Post username={user.name} email = {user.email} caption={post.caption} imgSrc={post.url} profileImg ={user.profileImg} id = {post.id}/>
                     ))
                 ))   
             }

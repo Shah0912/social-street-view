@@ -34,7 +34,7 @@ const GET_DATA_QUERY = gql`
 function PostGrid({email}) {
   const {isAuthenticated, user} = useAuth0();
   console.log("{email} = ",{email}, "email = ", email);
-  const { loading, error, data } = useQuery(GET_DATA_QUERY,{variables:{email:"adi.shah0912@gmail.com"}});
+  const { loading, error, data } = useQuery(GET_DATA_QUERY,{variables:{email:email.email}});
   if (error) return <p>Error</p>
   if (loading) return <p>Loading</p>
 

@@ -7,7 +7,7 @@ import Comment from '../individual_post/Comment'
 import {useAuth0} from '@auth0/auth0-react';
 import { useMutation, useQuery, gql } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
-
+import {Link} from 'react-router-dom'
 import "./Post.css"
 import Icomment from '../individual_post/Icomment';
 
@@ -41,7 +41,7 @@ const ADD_LIKES = gql `
 `
 
 
-function Post({username, profileImg, imgSrc, caption, id}) {
+function Post({username, email, profileImg, imgSrc, caption, id}) {
     //For routing to individual post
     const history = useHistory();
     //Context for User from Auth0
@@ -64,6 +64,13 @@ function Post({username, profileImg, imgSrc, caption, id}) {
         console.log("textColor", textColor)
     }
 
+    const [Email, setEmail] = useState("");
+
+    useEffect(() => {
+        if(isAuthenticated == true) {
+          setEmail(user.email);
+        }
+    }, [isAuthenticated]);
 
     function handleClick() {
         console.log(id);
@@ -72,20 +79,26 @@ function Post({username, profileImg, imgSrc, caption, id}) {
             data: id
         });
     }
-
     
     return (
         <div className="post">
 
             <div className="postHeader">
-                <Avatar 
-                    className="postAvatar"
-                    alt = {username}
-                    src = {profileImg}
-                    // alt={username}
-                    // alt="AdityaShah"
-                    // src="https://images.alphacoders.com/711/thumb-350-711581.jpg"
-                />
+                <Link to = {{
+                    pathname: "/profile",
+                    state: {
+                        email: {email}
+                    }
+                }} >
+                    <Avatar 
+                        className="postAvatar"
+                        alt = {username}
+                        src = {profileImg}
+                        // alt={username}
+                        // alt="AdityaShah"
+                        // src="https://images.alphacoders.com/711/thumb-350-711581.jpg"
+                    />
+                </Link>
                 <h3>{username}</h3>
             </div>
 

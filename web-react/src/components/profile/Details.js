@@ -28,11 +28,21 @@ const GET_USER = gql `
         id
       }
     }
+    # query getFollows($email2: String!) {
+    #   User(filter: {email:$email2}) {
+    #     email
+    #     name
+    #     follows{
+    #       email
+    #       name
+    #     }
+    #   }
+    # }
   }
 `
 const FOLLOW = gql `
   mutation ($email1: String!, $email2: String!) {
-    AddUserFollows(from:{email:$email1} to:{email:$email2}) {
+    MergeUserFollows(from:{email:$email1} to:{email:$email2}) {
       from{
         email
         name
@@ -69,7 +79,7 @@ function Details({email}) {
   const [unfollow] = useMutation(UNFOLLOW);
 
   const {loading, error, data} = useQuery(GET_USER, {
-    variables: {email: user.email},
+    variables: {email: email.email   },
     // pollInterval: 1000,
   });
 
@@ -95,10 +105,11 @@ function Details({email}) {
   console.log("Data = ", data);
   if(Data) {
     {
-      Data.User[0].follows.forEach(fol => {
-        if(fol.email === user.email)
+      Data.User[1].follows.forEach(fol => {
+        if(fol.email === Data.User[0].email)
           setFollows(true);
       });
+      console.log("Follows = ", Follows);
     }
     // {
     //   if(Data.User[0].email === user.email)
@@ -110,7 +121,7 @@ function Details({email}) {
       follow({
         variables: {
           email1: Email,
-          email2: Data.User[0].email
+          email2: email.email
         }
       })
     }
@@ -119,7 +130,7 @@ function Details({email}) {
       unfollow({
         variables: {
           email1: Email,
-          email2: Data.User[0].email
+          email2: email.email
         }
       })
     }
@@ -150,16 +161,16 @@ function Details({email}) {
                             <h2>{Data.User[0].name}</h2>
                           </Grid>
                           <Grid item xs>
-                            {!Follows && Data.User[0].email != user.email &&
+                            {!Follows && Data.User[0].email != user.email && (
                             <Button variant="outlined" onClick = {handleFollow}>
                               <PersonAddIcon />
                             </Button>
-                            }
-                            {Follows && Data.User[0].email != user.email &&
+                            )}
+                            {Follows && Data.User[0].email != user.email && (
                               <Button variant="outlined" onClick = {handleUnfollow}>
                                 <PersonAddDisabledIcon />
                               </Button>
-                            }
+                            )}
                           </Grid>
                         </Grid>
                         {/* <Grid container spacing="4">
