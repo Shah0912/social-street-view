@@ -40,13 +40,15 @@ type Text {
 }
 
 type Comment {
-  _id: Long!
-  id: String!
-  sentiment: Int!
-  text: String!
-  timestamp: String!
-
-  users: [User] @relation(name: "commented", direction: "IN")
+   _id: Long!
+   id: String!
+   sentiment: Int
+   text: String!
+   latitude: String
+   longitude: String
+   timestamp: String!
+   on: [Image] @relation(name: "on", direction: "OUT")
+   users: [User] @relation(name: "commented", direction: "IN")
 }
 
 type District {
