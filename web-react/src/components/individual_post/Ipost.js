@@ -7,6 +7,7 @@ import Comment from './Comment';
 import Icomment from './Icomment';
 import {useAuth0} from '@auth0/auth0-react';
 import { useMutation, useQuery, gql } from '@apollo/client';
+import {Link} from 'react-router-dom'
 
 
 import "./Ipost.css"
@@ -28,6 +29,7 @@ const GET_POST = gql `
                 users {
                     name
                     profileImg
+                    email
                 }
             }
 
@@ -39,6 +41,8 @@ const GET_POST = gql `
 `
 
 function Ipost(id) {
+
+    const [email, setemail] = useState("");
     console.log('HERE')
     console.log(id)
     const {isAuthenticated, user} = useAuth0();
@@ -55,6 +59,7 @@ function Ipost(id) {
     useEffect(() => {
         if(loading == false && data) {
             setData(data);
+            setemail(data.Image[0].posts[0].users_posted[0].email);
         }
     }, [loading, data]);
 
@@ -71,7 +76,7 @@ function Ipost(id) {
     //     }
     // }, [loading1, data1]);
 
-
+    
 
     if (loading) return 'Loading...';
     if (error) return `Error! ${error.message}`;
@@ -87,6 +92,12 @@ function Ipost(id) {
             <div className="ipost">
                 <div className="photo">
                     <div className="ipostTop">
+                    <Link to = {{
+                        pathname: "/profile",
+                        state: {
+                            email: {email}
+                        }
+                    }} >
                         <Avatar 
                             className="ipostAvatar"
                             // alt="AdityaShah"
@@ -94,6 +105,7 @@ function Ipost(id) {
                             // src="https://images.alphacoders.com/711/thumb-350-711581.jpg"
                             src= {Data.Image[0].posts[0].users_posted[0].profileImg}
                         />
+                    </Link>
                         <h3>{Data.Image[0].posts[0].users_posted[0].name}</h3>
                         
                     </div>
@@ -125,10 +137,12 @@ function Ipost(id) {
                 <div className="comments">
                     <h2>Comments</h2>
                     <Comment id = {id.location.data} email = {user.email}/>
+                    {console.log("email State = ", email)}
+                    
                     {/* <div className="comment"> */}
                         {
                             Data.Image[0].comments_on.map((com) => (
-                                <Icomment username={com.users[0].name} cmt={com.text} profileImg = {com.users[0].profileImg} />
+                                <Icomment username={com.users[0].name} email={com.users[0].email} cmt={com.text} profileImg = {com.users[0].profileImg} />
                             ))
                         }
                         {/* <Icomment username={"Sarang Shekokar"} cmt={"This is a comment"} profileImg = {"https://images.alphacoders.com/711/thumb-350-711581.jpg"}/>  */}

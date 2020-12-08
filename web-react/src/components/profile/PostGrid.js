@@ -4,6 +4,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { useTheme } from '@material-ui/core/styles'
 import { useQuery, gql } from '@apollo/client'
 import {useAuth0} from '@auth0/auth0-react'
+import { useHistory } from 'react-router-dom';
 
 //import withWidth, { isWidthUp } from '@material-ui/core/withWidth'
 
@@ -16,6 +17,7 @@ const GET_DATA_QUERY = gql`
     {
       has_image
       {
+        id
         url
       },
       has_video
@@ -33,10 +35,12 @@ const GET_DATA_QUERY = gql`
 
 function PostGrid({email}) {
   const {isAuthenticated, user} = useAuth0();
+  const history = useHistory();
   console.log("{email} = ",{email}, "email = ", email);
   const { loading, error, data } = useQuery(GET_DATA_QUERY,{variables:{email:email.email}});
   if (error) return <p>Error</p>
   if (loading) return <p>Loading</p>
+
 
   //const url = data.User[0].posted[1].has_image[0].url
   /*     'https://images.unsplash.com/photo-1495615080073-6b89c9839ce0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=822&q=80'
@@ -46,9 +50,17 @@ function PostGrid({email}) {
     {
       const url = post.has_image[0].url
       return(
-        <GridListTile style={{ height: '100%' }}>
-        <img src={url} alt="f" style={{ width: '100%' }} />
-      </GridListTile>
+        <div onClick = {()=>{
+          history.push({
+            pathname: '/post',
+            data: post.has_image[0].id
+          });
+        }}>
+          <GridListTile style={{ height: '100%' }} >
+            <img src={url} alt="f" style={{ width: '100%' }}  />
+          </GridListTile>
+        </div>
+        
       )
     }
     if(post.has_video.length)

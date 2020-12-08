@@ -105,7 +105,7 @@ function Details({email}) {
   console.log("Data = ", data);
   if(Data) {
     {
-      Data.User[1].follows.forEach(fol => {
+      Data.User[0].follows.forEach(fol => {
         if(fol.email === Data.User[0].email)
           setFollows(true);
       });

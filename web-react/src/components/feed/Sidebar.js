@@ -50,7 +50,7 @@ function Sidebar() {
                 // console.log("suggestions", Data.getSuggestions[0].email) 
 
                 Data.getSuggestions.map((fol=>(
-                    <SidebarRow username={fol.name} profilePic = {fol.profileImg} />
+                    <SidebarRow username={fol.name} email = {fol.email} profilePic = {fol.profileImg} />
                 ))) 
             }
 

@@ -59,7 +59,7 @@ const Header = () => {
   const [Logged, setLogged] = useState(0);
   
   const [Name, setName] = useState("");
-  const [Email, setEmail] = useState("");
+  const [email, setemail] = useState("");
   const [PrfImg, setPrfImg] = useState("");
 
 
@@ -67,7 +67,7 @@ const Header = () => {
     if(isAuthenticated == true) {
       createUser({ variables: {name: user.name, email: user.email, profileImg: user.picture} });
       console.log("executed query");
-      setEmail(user.email);
+      setemail(user.email);
     }
 }, [isAuthenticated]);
 
@@ -118,7 +118,7 @@ const Header = () => {
           <Link to = {{
             pathname: "/profile",
             state: {
-              email: {Email}
+              email: {email}
             }
           }} >
             <IconButton alignItems="center">
@@ -159,7 +159,7 @@ const Header = () => {
             // console.log(user);
             setLogged(1);
             setName(user.name);
-            setEmail(user.email);
+            setemail(user.email);
             setPrfImg(user.picture);
             }} >
             Log In
