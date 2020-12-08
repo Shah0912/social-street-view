@@ -3,38 +3,54 @@ import React,{useState, useEffect} from 'react'
 import { useMutation, gql } from '@apollo/client';
 import "./Comment.css"
 
+var Sentiment = require('sentiment')
 
 const { v4: uuidv4 } = require('uuid');
 
 
 
-const ADD_COMMENT = gql `
-    mutation add_comment($Cid: String!, $Com: String!, $Ctime: String!, $lat: String, $lon: String, $Iid: String!, $email: String!) {
-        CreateComment(id: $Cid text: $Com timestamp: $Ctime latitude: $lat longitude: $lon) {
-            id
-            text
-        }
-
-        AddCommentOn (from:{id:$Cid} to:{id:$Iid}) {
-            from{
-                text
-            }
-            to {
-                id
-            }
-        }
-        
-        AddCommentUsers(from:{email:$email} to:{id:$Cid}) {
-            from{
-                name
-                email
-            }
-            to {
-                text
-            }
-        }
-        
+const ADD_COMMENT = gql`
+  mutation add_comment(
+    $sentiment: Int
+    $Cid: String!
+    $Com: String!
+    $Ctime: String!
+    $lat: String
+    $lon: String
+    $Iid: String!
+    $email: String!
+  ) {
+    CreateComment(
+      sentiment: $sentiment
+      id: $Cid
+      text: $Com
+      timestamp: $Ctime
+      latitude: $lat
+      longitude: $lon
+    ) {
+      id
+      text
     }
+
+    AddCommentOn(from: { id: $Cid }, to: { id: $Iid }) {
+      from {
+        text
+      }
+      to {
+        id
+      }
+    }
+
+    AddCommentUsers(from: { email: $email }, to: { id: $Cid }) {
+      from {
+        name
+        email
+      }
+      to {
+        text
+      }
+    }
+  }
 `
 
 
@@ -60,24 +76,29 @@ function Comment({id, email}) {
         })
     },[])
 
+    const sentiment1 = new Sentiment()
     function onSubmit(Com, id, email) {
         let Ctime = new Date();
         let Cid = uuidv4();
+        const res = sentiment1.analyze(Com)
+        const sentiment = res.score
+
         // navigator.geolocation.getCurrentPosition((position)=>{
         //     console.log("position = ", position);
         //     setlat(position.coords.latitude);
         //     setlon(position.coords.longitude);
         // })
         addComment({
-            variables: {
-                Cid: Cid, 
-                Com: Com, 
-                Ctime: Ctime,
-                lat: lat.toString(),
-                lon: lon.toString(),
-                Iid: id,
-                email: email
-            }
+          variables: {
+            Cid: Cid,
+            Com: Com,
+            Ctime: Ctime,
+            lat: lat.toString(),
+            lon: lon.toString(),
+            Iid: id,
+            email: email,
+            sentiment: sentiment,
+          },
         })
         setEnteredText('');
     }

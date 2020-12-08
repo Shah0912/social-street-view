@@ -10,22 +10,22 @@ import {useAuth0} from '@auth0/auth0-react';
 import "./Feed.css";
 
 const GET_POSTS = gql`
-    query getPosts {
-        User (first:5) {
-            email
-            name
-            profileImg
-            posted {
-                # has_video
-                has_image (orderBy:timestamp_desc) {
-                    id
-                    caption
-                    timestamp
-                    url
-                }
-            }
+  query getPosts {
+    User(first: 5) {
+      email
+      name
+      profileImg
+      posted {
+        # has_video
+        has_image(orderBy: timestamp_desc) {
+          id
+          caption
+          timestamp
+          url
         }
+      }
     }
+  }
 `
 
 

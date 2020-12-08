@@ -1,9 +1,41 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactMapGL, { Source, Layer } from 'react-map-gl'
-import data from '../maharashtra_districts.json'
+import data1 from '../maharashtra_districts1 (copy).json'
 import { Container } from '@material-ui/core'
+import { useQuery, gql } from '@apollo/client'
+
+const GET_DATA_QUERY = gql`
+  query($id: String!) {
+    Image(id: $id) {
+      comments_on {
+        dist_id
+        sentiment
+      }
+    }
+  }
+`
 
 function Sentiment() {
+  const { loading, error, data } = useQuery(GET_DATA_QUERY, {
+    variables: { id: 'cc8255b8-00e8-4189-b73d-fb7e6def30bb' },
+  })
+  const [Data, setData] = useState([])
+  useEffect(() => {
+    if (loading == false && data) {
+      setData(data.Image[0].comments_on)
+    }
+  }, [loading, data])
+  //console.log(data1.features[0].geometry.coordinates)
+  //console.log(Data)
+  data1.features.map((feature) => {
+    Data.map((comment) => {
+      feature.properties.sentiment = -6
+      if (comment.dist_id === feature.properties.cartodb_id) {
+        feature.properties.sentiment = comment.sentiment
+      }
+    })
+  })
+
   const [viewport, setViewport] = useState({
     longitude: 74.781153,
     latitude: 19.496864,
@@ -36,16 +68,28 @@ function Sentiment() {
         onHover={_onHover}
         mapStyle="mapbox://styles/shekokar/ckgxa6j0f4vl319r1algxld2d"
       >
-        <Source id="oregonjson" type="geojson" data={data}>
+        <Source id="oregonjson" type="geojson" data={data1}>
           <Layer
             id="test"
             type="fill"
             source="oregonjson"
             paint={{
               'fill-color': {
-                property: 'pop_prop_2011',
+                property: 'sentiment',
                 stops: [
-                  [0, '#3288bd'],
+                  [-6, '#636363'],
+                  [-5, '#ff0000'],
+                  [-4, '#ff3300'],
+                  [-3, '#ff6600'],
+                  [-2, '#ff9900'],
+                  [-1, '#ffcc00'],
+                  [0, '#ffff00'],
+                  [1, '#ccff00'],
+                  [2, '#99ff00'],
+                  [3, '#66ff00'],
+                  [4, '#33ff00'],
+                  [5, '#00ff00'],
+                  /* [0, '#3288bd'],
                   [1, '#66c2a5'],
                   [2, '#abdda4'],
                   [3, '#e6f598'],
@@ -53,7 +97,7 @@ function Sentiment() {
                   [5, '#fee08b'],
                   [6, '#fdae61'],
                   [7, '#f46d43'],
-                  [8, '#d53e4f'],
+                  [8, '#d53e4f'], */
                 ],
               },
               'fill-opacity': 0.4,
@@ -77,9 +121,11 @@ function Sentiment() {
               pointerEvents: 'none',
             }}
           >
+            <div>Sentiment: {hover.hoveredFeature.properties.sentiment < -5 ? "N/A" : hover.hoveredFeature.properties.sentiment}</div>
             <div>State: {hover.hoveredFeature.properties.name_1}</div>
             <div>District: {hover.hoveredFeature.properties.name_2}</div>
-            <div>Population: {hover.hoveredFeature.properties.pop}</div>
+
+            {/* <div>Population: {hover.hoveredFeature.properties.pop}</div> */}
           </div>
         )}
       </ReactMapGL>

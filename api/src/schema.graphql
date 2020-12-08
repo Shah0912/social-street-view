@@ -43,6 +43,7 @@ type Comment {
    _id: Long!
    id: String!
    sentiment: Int
+   dist_id: Int @cypher(statement:"MATCH (d:District),(this) WHERE EXISTS(d.polygon) AND spatial.algo.withinPolygon(Point({latitude:toFloat(this.latitude), longitude:toFloat(this.longitude)}),d.polygon) RETURN (d.cartodb_id)")
    text: String!
    latitude: String
    longitude: String
@@ -62,6 +63,7 @@ type District {
    name_0: String!
    name_1: String!
    name_2: String!
+   polygon: [Point]!
    pop: Int!
    pop_prop_2011: String!
    type_2: String!
@@ -155,12 +157,17 @@ type Mutation {
 
 
 type Query {
-   getImageUrl(imageName: String!, transformOptions: TransformImageOptionsInput): ImageUrl!
-   getSuggestions(email: String!) : [User] 
-   # @isAuthenticated 
-   @cypher(statement: """
+  getImageUrl(
+    imageName: String!
+    transformOptions: TransformImageOptionsInput
+  ): ImageUrl!
+  getSuggestions(email: String!): [User]
+    # @isAuthenticated
+    @cypher(
+      statement: """
       MATCH (u: User{email: $email}) - [:follows] -> (f:User) - [:follows] -> (ans: User)
       WHERE(u.email <> ans.email)
       RETURN ans;
-   """)
+      """
+    )
 }
