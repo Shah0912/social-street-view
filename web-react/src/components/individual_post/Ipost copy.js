@@ -7,7 +7,7 @@ import Comment from './Comment';
 import Icomment from './Icomment';
 import {useAuth0} from '@auth0/auth0-react';
 import { useMutation, useQuery, gql } from '@apollo/client';
-import { useHistory, Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 
 import "./Ipost.css"
@@ -41,7 +41,7 @@ const GET_POST = gql `
 `
 
 function Ipost(id) {
-    const history = useHistory()
+
     const [email, setemail] = useState("");
     console.log('HERE')
     console.log(id)
@@ -63,13 +63,6 @@ function Ipost(id) {
         }
     }, [loading, data]);
 
-    function handleClick() {
-      console.log(id)
-      history.push({
-        pathname: '/sentiment',
-        data: id.location.data,
-      })
-    }
 
     //FOR GETTING COMMENTS
     // const {loading1, error1, data1} = useQuery(GET_COMMENTS, {
@@ -139,7 +132,7 @@ function Ipost(id) {
                   <CommentIcon />
                   <p>Comment</p>
                 </div>
-                <div className="ipostOption" onClick={handleClick}>
+                <div className="ipostOption">
                   <NearMeIcon />
                   <p>Sentiment Map</p>
                 </div>

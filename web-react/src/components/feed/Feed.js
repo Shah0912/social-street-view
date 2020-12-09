@@ -20,7 +20,7 @@ const GET_POSTS = gql`
         has_image(orderBy: timestamp_desc) {
           id
           caption
-          timestamp
+          #timestamp
           url
         }
       }

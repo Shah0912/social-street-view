@@ -5,6 +5,7 @@ import { useMutation, gql } from '@apollo/client';
 import { useDropzone } from 'react-dropzone';
 import {useAuth0} from '@auth0/auth0-react';
 import axios from 'axios';
+import {Grid,TextField,makeStyles, Button} from '@material-ui/core'
 
 
 const { v4: uuidv4 } = require('uuid');
@@ -160,32 +161,40 @@ export default function UploadImageForm(props) {
 
 
   return (
-    <div>
-      <h1>Upload Images</h1>
-      {
-        uploadSuccess && <p css={css`
+    <div >
+      <Grid container justify="center" >
+      
+        <Grid item style={{display:'flex',flexDirection:'column', maxWidth:'400', minWidth:'300'}} >
+          <h1>Upload Image</h1>
+          <div {...getRootProps()}>
+          <input {...getInputProps()} />
+        <Button  color="primary" variant="contained">
+            Choose Photo
+          </Button>
+          {console.log("inputProps = ",getInputProps())}
+          </div>
+          <TextField onChange={e => handleChange(e)} size="small" variant="outlined" placeholder="Title" margin="normal"/>
+          <TextField onChange={e=>handleChangeL(e)} size="small" variant="outlined" placeholder="Location" margin="normal"/>
+          <TextField onChange={e=>handleChangeS(e)} size="small" variant="outlined" placeholder="State" margin="normal"/>
+          <TextField onChange={e=>handleChangeT(e)} size="small" variant="outlined" placeholder="Tags" margin="normal"/>
+          <TextField onChange={e=>handleChangeC(e)} size="small" variant="outlined" placeholder="Caption" margin="normal"/>
+          <div style={{height:20}} />
+          {isAuthenticated && !!fileToUpload &&
+          <Button onClick={() => onSubmit(fileToUpload, uploadOptions)} color="primary" variant="contained">
+            Upload Photo
+          </Button>
+          }
+          {
+        uploadSuccess && <h1 style={css`
           color: lightgreen;
         `}>
           Successfully Uploaded!
-        </p>
+        </h1>
       }
-      <input type="text" placeholder="Title" onChange={e => handleChange(e)} />
-      <div {...getRootProps()}>
-        <input {...getInputProps()} />
-        <p> 
-        
-        Choose file to upload...
-        
-        </p>
-        {console.log("inputProps = ",getInputProps())}
+        </Grid>
+      </Grid>
       </div>
-      <input type="text" placeholder="Location" onChange={e=>handleChangeL(e)}/>
-      <input type="text" placeholder="State" onChange={e=>handleChangeS(e)}/>
-      <input type="text" placeholder="tags" onChange={e=>handleChangeT(e)} />
-      <input type="text" placeholder="caption" onChange={e=>handleChangeC(e)} />
-      {isAuthenticated && !!fileToUpload &&
-        <button onClick={() => onSubmit(fileToUpload, uploadOptions)}> Upload Photo</button>
-      }
-    </div>
+
+    
   );
 };
