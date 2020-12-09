@@ -77,7 +77,8 @@ const Header = () => {
         <Link to="/">
           <img
             alt="logo"
-            src="https://res-console.cloudinary.com/dw2ejcbvt/thumbnails/transform/v1/image/upload//v1607433940/bG9nb18xX3hybWtjZg==/drilldown"
+            // src="https://res-console.cloudinary.com/dw2ejcbvt/thumbnails/transform/v1/image/upload//v1607433940/bG9nb18xX3hybWtjZg==/drilldown"
+            src = "https://res.cloudinary.com/dcr3apezm/image/upload/v1607533642/logo_znkf0f.png"
             style={{ height: '40px' }}
           />
         </Link>
