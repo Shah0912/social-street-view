@@ -26,6 +26,8 @@ const GET_POST = gql `
             }
             comments_on(orderBy: timestamp_desc) {
                 text
+                sentiment
+                dist_id
                 users {
                     name
                     profileImg

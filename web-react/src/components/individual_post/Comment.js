@@ -64,9 +64,7 @@ function Comment({id, email}) {
 
 
     const [Com, setCom] = useState("");     
-    function handleChange(e) {
-        setCom(e.target.value);
-    }
+    const [sentiment, setsentiment] = useState(0);
 
     useEffect(()=>{
         navigator.geolocation.getCurrentPosition((position)=>{
@@ -76,13 +74,16 @@ function Comment({id, email}) {
         })
     },[])
 
-    const sentiment1 = new Sentiment()
+    const sentiment1 = new Sentiment();
+    function handleChange(e) {
+      setCom(e.target.value);
+      const res = sentiment1.analyze(Com)
+      setsentiment(res.score);
+      console.log("Sentiment = ",sentiment);
+  }
     function onSubmit(Com, id, email) {
         let Ctime = new Date();
         let Cid = uuidv4();
-        const res = sentiment1.analyze(Com)
-        const sentiment = res.score
-
         // navigator.geolocation.getCurrentPosition((position)=>{
         //     console.log("position = ", position);
         //     setlat(position.coords.latitude);
@@ -107,7 +108,7 @@ function Comment({id, email}) {
         <div className="postComment">
             <Avatar />
             <input type = "Text" placeholder="Write your comment" onChange={e=>handleChange(e)} className="commentText"/>
-            <button type="submit" className="commentButton" value={enteredText} onClick={() => onSubmit(Com, id, email)}> Post </button>
+            <button type="submit" className="commentButton" value={enteredText} onClick={() => onSubmit(Com, id, email, sentiment)}> Post </button>
         </div>
     )
 }
