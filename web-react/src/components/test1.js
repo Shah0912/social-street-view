@@ -1,16 +1,44 @@
 import React from 'react'
-var Sentiment = require('sentiment')
+import {Grid,TextField,makeStyles, Button} from '@material-ui/core'
 
-const sentiment = new Sentiment()
+const useStyle = makeStyles(theme => ({
+  root : {
+    '& .MuiFormControl-root': {
+      width:"80&",
+      margin:theme.spacing(1)
+    }
+  }
+}))
 
-function Test1() {
-  const res = sentiment.analyze('this is pathetic')
-  console.log(res)
+function test1() {
+  //const classes = useStyle()
   return (
     <div>
-      <p1>{res.score}</p1>
-    </div>
-  )
+      <form>
+        <div >
+      <Grid container justify="center" >
+      
+        <Grid item style={{display:'flex',flexDirection:'column', maxWidth:'400', minWidth:'300'}} >
+          <h1>Upload Image</h1>
+        <Button  color="primary" variant="contained">
+            Choose Photo
+          </Button>
+          <TextField size="small" variant="outlined" placeholder="Title" margin="normal"/>
+          <TextField size="small" variant="outlined" placeholder="Location" margin="normal"/>
+          <TextField size="small" variant="outlined" placeholder="State" margin="normal"/>
+          <TextField size="small" variant="outlined" placeholder="Tags" margin="normal"/>
+          <TextField size="small" variant="outlined" placeholder="Caption" margin="normal"/>
+          <div style={{height:20}} />
+          <Button color="primary" variant="contained">
+            Upload Photo
+          </Button>
+        </Grid>
+      </Grid>
+      </div>
+      </form>
+      </div>
+      
+    )
 }
 
-export default Test1
+export default test1

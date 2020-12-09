@@ -25,7 +25,7 @@ function Sentiment() {
       setData(data.Image[0].comments_on)
     }
   }, [loading, data])
-  //console.log(data1.features[0].geometry.coordinates)
+  console.log(data1)
   //console.log(Data)
   data1.features.map((feature) => {
     Data.map((comment) => {

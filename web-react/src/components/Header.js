@@ -77,8 +77,8 @@ const Header = () => {
         <Link to="/">
           <img
             alt="logo"
-            src="https://img.icons8.com/bubbles/2x/street-view.png"
-            style={{ height: '50px' }}
+            src="https://res-console.cloudinary.com/dw2ejcbvt/thumbnails/transform/v1/image/upload//v1607433940/bG9nb18xX3hybWtjZg==/drilldown"
+            style={{ height: '40px' }}
           />
         </Link>
         <div className="headerInput">
@@ -113,64 +113,63 @@ const Header = () => {
           className="headerInfo"
           style={{ maxHeight: '40px', justifyContent: 'center' }}
         >
-
           {/* <Link to="/profile" > */}
-          <Link to = {{
-            pathname: "/profile",
-            state: {
-              email: {email}
-            }
-          }} >
+          <Link
+            to={{
+              pathname: '/profile',
+              state: {
+                email: { email },
+              },
+            }}
+          >
             <IconButton alignItems="center">
-              {
-                isAuthenticated &&
-                <Avatar fontSize="small" src={user.picture} alt = {user.name}/>
-              }
+              {isAuthenticated && (
+                <Avatar fontSize="small" src={user.picture} alt={user.name} />
+              )}
             </IconButton>
           </Link>
           {/* <h4>Aditya Shah</h4> */}
           {/* <h4>{user.name}</h4> */}
-          {
-            isAuthenticated &&
-            <h4>{user.name}</h4>
-            
-          }
+          {isAuthenticated && <h4>{user.name}</h4>}
         </div>
-
 
         <Link to="/Upload">
           <IconButton className="iconLeft">
             <AddIcon />
           </IconButton>
         </Link>
-        
+
         <IconButton className="iconLeft">
           <NotificationsActiveIcon />
         </IconButton>
         {/* <IconButton className="iconLeft">
           <ArrowDropDownIcon />
         </IconButton> */}
-        {!isAuthenticated &&
-          <Button color = "inherit" onClick={()=>{
-            loginWithRedirect();
-            // MergeUser({variables:{name: user.name, email: user.email}});
+        {!isAuthenticated && (
+          <Button
+            color="inherit"
+            onClick={() => {
+              loginWithRedirect()
+              // MergeUser({variables:{name: user.name, email: user.email}});
 
-            // createUser({ variables: { name: user.value, email: user.email, $profileImg: user.picture} });
-            // console.log(user);
-            setLogged(1);
-            setName(user.name);
-            setemail(user.email);
-            setPrfImg(user.picture);
-            }} >
+              // createUser({ variables: { name: user.value, email: user.email, $profileImg: user.picture} });
+              // console.log(user);
+              setLogged(1)
+              setName(user.name)
+              setemail(user.email)
+              setPrfImg(user.picture)
+            }}
+          >
             Log In
           </Button>
-        }
+        )}
 
         {
-          isAuthenticated &&
-          <Button color="inherit" onClick={()=>logout()}>
-            Log Out
-          </Button> 
+          isAuthenticated && (
+            <Button color="inherit" onClick={() => logout()}>
+              Log Out
+            </Button>
+          )
           // createUser({ variables: { name: user.value, email: user.email, $profileImg: user.picture} });
         }
 
@@ -185,7 +184,6 @@ const Header = () => {
             NewUser
           </Button>
         } */}
-        
       </div>
     </div>
   )
