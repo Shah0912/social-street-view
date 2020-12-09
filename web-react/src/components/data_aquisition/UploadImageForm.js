@@ -161,7 +161,7 @@ export default function UploadImageForm(props) {
 
   return (
     <div>
-      <h1>Upload to Cloudinary</h1>
+      <h1>Upload Images</h1>
       {
         uploadSuccess && <p css={css`
           color: lightgreen;
