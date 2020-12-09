@@ -15,9 +15,9 @@ const GET_DATA_QUERY = gql`
   }
 `
 
-function Sentiment() {
+function Sentiment(id) {
   const { loading, error, data } = useQuery(GET_DATA_QUERY, {
-    variables: { id: 'cc8255b8-00e8-4189-b73d-fb7e6def30bb' },
+    variables: { id: id.location.data  },
   })
   const [Data, setData] = useState([])
   useEffect(() => {
@@ -121,7 +121,12 @@ function Sentiment() {
               pointerEvents: 'none',
             }}
           >
-            <div>Sentiment: {hover.hoveredFeature.properties.sentiment < -5 ? "N/A" : hover.hoveredFeature.properties.sentiment}</div>
+            <div>
+              Sentiment:{' '}
+              {hover.hoveredFeature.properties.sentiment < -5
+                ? 'N/A'
+                : hover.hoveredFeature.properties.sentiment}
+            </div>
             <div>State: {hover.hoveredFeature.properties.name_1}</div>
             <div>District: {hover.hoveredFeature.properties.name_2}</div>
 
