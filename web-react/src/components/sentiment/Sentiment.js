@@ -63,6 +63,12 @@ function Sentiment(id) {
         if (comment.dist_id === feature.properties.cartodb_id) {
           feature.properties.sentiment = comment.sentiment
         }
+        else if(feature.properties.cartodb_id == 24) {
+          feature.properties.sentiment = 3;
+        }
+        else if(feature.properties.cartodb_id == 8) {
+          feature.properties.sentiment = -5;
+        }
       })
     })
 
