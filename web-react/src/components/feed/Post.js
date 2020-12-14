@@ -11,6 +11,7 @@ import {Link} from 'react-router-dom'
 import "./Post.css"
 import Icomment from '../individual_post/Icomment';
 
+// Get the post and the comments.
 const GET_COMMENTS = gql`
     query GetComments($Iid:String!) {
         Image(id: $Iid) {
@@ -25,7 +26,7 @@ const GET_COMMENTS = gql`
         }
     }
 `
-
+// Add likes relation from user to the Image
 const ADD_LIKES = gql `
     mutation($email: String! $Iid: String!) {
         MergeUserLikes(from:{email:$email} to:{id:$Iid}) {
@@ -122,25 +123,7 @@ function Post({username, email, profileImg, imgSrc, caption, id}) {
             </div>
 
             <div className="Comments">
-                {/* <h2>Comments</h2> */}
-                <Comment id = {id} email = {user.email} />
-                <div className="Comment">
-                    {/* <Avatar 
-                        className="postAvatar"
-                        alt = {username}
-                        src = {profileImg}
-                        alt={username}
-                        alt="AdityaShah"
-                        src="https://images.alphacoders.com/711/thumb-350-711581.jpg"
-                    />
-                    <h3>Sarang Shekokar : </h3>
-                    <p>This is a comment</p> */}
-
-                    
-
-                    {/* <Icomment username = "Sarang Shekokar" cmt = "This is a comment" profileImg = "https://images.alphacoders.com/711/thumb-350-711581.jpg"/> */}
-                </div>
-                
+                <Comment id = {id} email = {user.email} />              
             </div>
             
         </div>

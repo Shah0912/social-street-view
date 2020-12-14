@@ -8,6 +8,7 @@ import "./SidebarRow.css"
 function SidebarRow({username, email, profilePic}) {
 
     return (
+        // on click take to the profile of the suggested person.
         <div className="sidebarRow">
             <Link to = {{
                 pathname: "/profile",

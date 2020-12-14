@@ -15,10 +15,12 @@ function Story({image, profileSrc, title, id}) {
             pathname:'/post',
             data: id
         });
+        // Goes to /post route.
     }
 
     
     return (
+        // Display the story and the Avatar of the user with the title.
         <div className="story" style={{backgroundImage:`url(${image})`}} onClick={handleOnClick} >
             <Avatar className="storyAvatar" src={profileSrc}  />
             <h4>{title}</h4>

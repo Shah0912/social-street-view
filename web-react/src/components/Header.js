@@ -1,3 +1,5 @@
+// Navigation bar, this component is rendered on every view.
+
 import React,{useState, useEffect} from "react";
 import "./Header.css";
 import {Link} from 'react-router-dom'
@@ -14,16 +16,10 @@ import {useAuth0} from '@auth0/auth0-react'
 import {Button} from '@material-ui/core'
 import { useQuery, gql, useMutation} from '@apollo/client'
 
+//All the icons used are taken from material-ui/core
 
-// const STORE_USER = gql`
-//   mutation MergeUser ($name:String!, $email: String!) {
-//   mergeUser(name: $name email: $email) {
-//     name
-//     email
-//   }
-// }
-// `
-
+// Merge user query : If a user exists merge the node, if it doesn't create a new node.
+//Returns name, email and profileImg that are stored.
 const MERGE_USER = gql`
   mutation mergeUserMutation ($name: String!, $email: String!, $profileImg: String!) {
   MergeUser(name:$name, email: $email, profileImg: $profileImg) {
@@ -48,10 +44,12 @@ const Header = () => {
     color:'#2e81f4'
   }
 
+  // Get the loginWithRedirect and logout functions.
   const {loginWithRedirect, logout, isAuthenticated, user} = useAuth0();
 
   // const [mergeUser] = useMutation(MergeUser);
 
+  // React hook to call the mutation.
   const [createUser, { data, loading, error }] = useMutation(
     MERGE_USER
   )
@@ -67,9 +65,11 @@ const Header = () => {
     if(isAuthenticated == true) {
       createUser({ variables: {name: user.name, email: user.email, profileImg: user.picture} });
       console.log("executed query");
+      // If the user is authenticated merge the user.
       setemail(user.email);
     }
 }, [isAuthenticated]);
+// Runs every time isAuthenticated is updated.
 
   return (
     <div className="header">
@@ -81,6 +81,7 @@ const Header = () => {
             src = "https://res.cloudinary.com/dcr3apezm/image/upload/v1607533642/logo_znkf0f.png"
             style={{ height: '40px' }}
           />
+          {/* Logo of the app */}
         </Link>
         <div className="headerInput">
           <SearchIcon />
@@ -123,6 +124,7 @@ const Header = () => {
               },
             }}
           >
+            {/* If user is authenticated show the name adn profileImg */}
             <IconButton alignItems="center">
               {isAuthenticated && (
                 <Avatar fontSize="small" src={user.picture} alt={user.name} />
@@ -131,9 +133,9 @@ const Header = () => {
           </Link>
           {/* <h4>Aditya Shah</h4> */}
           {/* <h4>{user.name}</h4> */}
+          
           {isAuthenticated && <h4>{user.name}</h4>}
         </div>
-
         <Link to="/Upload">
           <IconButton className="iconLeft">
             <AddIcon />
@@ -173,18 +175,6 @@ const Header = () => {
           )
           // createUser({ variables: { name: user.value, email: user.email, $profileImg: user.picture} });
         }
-
-        {/* {
-          isAuthenticated &&
-          <Button color="inherit" onClick={()=>{
-            console.log(user);
-            createUser({ variables: {name: user.name, email: user.email, profileImg: user.picture} });
-            // createUser();
-            console.log(user);
-          }}>
-            NewUser
-          </Button>
-        } */}
       </div>
     </div>
   )

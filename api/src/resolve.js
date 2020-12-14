@@ -6,6 +6,7 @@ cloudinary.config({
   api_key: '267567191589782',
   api_secret: 'eV-HoiMHwvvmHWLMiuOEim2hfBQ',
 })
+// Config cloudinary
 
 export const resolvers = {
         Mutation: {
@@ -26,6 +27,8 @@ export const resolvers = {
           
 
         },
+
+        
 
          /* Query: {
     getImageUrl: (_, { imageName, transformOptions }) => {

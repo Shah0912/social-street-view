@@ -43,6 +43,7 @@ type Comment {
    _id: Long!
    id: String!
    sentiment: Int
+   # Custom cypher query to determine the value of dist_id
    dist_id: Int @cypher(statement:"MATCH (d:District),(this) WHERE EXISTS(d.polygon) AND spatial.algo.withinPolygon(Point({latitude:toFloat(this.latitude), longitude:toFloat(this.longitude)}),d.polygon) RETURN (d.cartodb_id)")
    text: String!
    latitude: String
@@ -73,6 +74,7 @@ type District {
 type User {
    _id: Long!
    email: String!
+   # Custom cypher query to determine the value of followers
    followers: Int! @cypher(statement:"MATCH (this)<-[:follows]-(u:User) RETURN count(u)")
    # gender: String!
    # id: String!
@@ -163,6 +165,7 @@ type Query {
   ): ImageUrl!
   getSuggestions(email: String!): [User]
     # @isAuthenticated
+    # Custom cypher mutation added to get list of suggestions for the user.
     @cypher(
       statement: """
       MATCH (u: User{email: $email}) - [:follows] -> (f:User) - [:follows] -> (ans: User)

@@ -1,3 +1,5 @@
+/* The commented part can be used to store image locally */
+
 
 // import React, { Component } from 'react';
 // import axios from 'axios';
@@ -230,6 +232,7 @@
 
 // export default Upload;
 
+// If we want to use cloudinary
 
 import React from 'react'
 import UploadImageForm from './UploadImageForm';

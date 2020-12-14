@@ -22,6 +22,7 @@ const app = express()
  * https://grandstack.io/docs/neo4j-graphql-js-api.html#makeaugmentedschemaoptions-graphqlschema
  */
 
+//  Automatically add basic add, delete, merge, etc operations on all the typedefs
 const schema = makeAugmentedSchema({
   typeDefs,
   resolvers,

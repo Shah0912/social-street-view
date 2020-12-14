@@ -1,3 +1,5 @@
+// Shows the top part of the Profile page
+
 import React,{useState, useEffect} from 'react'
 import {
   Avatar,
@@ -13,6 +15,7 @@ import {useAuth0} from '@auth0/auth0-react'
 import { useQuery, gql, useMutation} from '@apollo/client'
 import PersonAddDisabledIcon from '@material-ui/icons/PersonAddDisabled';
 
+// Get User details
 const GET_USER = gql `
   query getUser($email: String!) {
     User(filter: {email: $email}) {
@@ -28,18 +31,10 @@ const GET_USER = gql `
         id
       }
     }
-    # query getFollows($email2: String!) {
-    #   User(filter: {email:$email2}) {
-    #     email
-    #     name
-    #     follows{
-    #       email
-    #       name
-    #     }
-    #   }
-    # }
   }
 `
+
+// Follow mutation
 const FOLLOW = gql `
   mutation ($email1: String!, $email2: String!) {
     MergeUserFollows(from:{email:$email1} to:{email:$email2}) {
@@ -54,7 +49,7 @@ const FOLLOW = gql `
     }
   }
 `
-
+// Unfollow mutation
 const UNFOLLOW = gql `
   mutation ($email1: String!, $email2: String!) {
     RemoveUserFollows(from:{email:$email1} to:{email:$email2}) {
@@ -74,6 +69,7 @@ const UNFOLLOW = gql `
 function Details({email}) {
 
   const {isAuthenticated, user} = useAuth0();
+  // Auth0 context
 
   const [follow] = useMutation(FOLLOW);
   const [unfollow] = useMutation(UNFOLLOW);
@@ -111,11 +107,6 @@ function Details({email}) {
       });
       console.log("Follows = ", Follows);
     }
-    // {
-    //   if(Data.User[0].email === user.email)
-    //     setFollows(true);
-    // }
-
 
     function handleFollow() {
       follow({
@@ -147,9 +138,7 @@ function Details({email}) {
                     >
                       <Grid item xs sm={4}>
                         <Avatar
-                          // alt="MKBHD"
                           alt = {Data.User[0].name}
-                          // src="https://instagram.fbom3-1.fna.fbcdn.net/v/t51.2885-19/s150x150/119212035_239827994073834_7752811925137782806_n.jpg?_nc_ht=instagram.fbom3-1.fna.fbcdn.net&_nc_ohc=HQb7do4VVsYAX_0l7Zu&oh=fa5d4001d57b6ceb31b10b70270678c7&oe=5FB91AC9"
                           src = {Data.User[0].profileImg}
                           style={{ height: '168px', width: '168px' }}
                         />
@@ -157,7 +146,6 @@ function Details({email}) {
                       <Grid item xs sm={8}>
                         <Grid container spacing="1" alignItems="center">
                           <Grid item xs>
-                            {/* <h2>Sarang Shekokar</h2> */}
                             <h2>{Data.User[0].name}</h2>
                           </Grid>
                           <Grid item xs>

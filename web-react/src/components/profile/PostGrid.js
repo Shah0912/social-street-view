@@ -1,3 +1,5 @@
+// Shows the posted images
+
 import React from 'react'
 import { GridList, GridListTile, Grid } from '@material-ui/core'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
@@ -8,6 +10,7 @@ import { useHistory } from 'react-router-dom';
 
 //import withWidth, { isWidthUp } from '@material-ui/core/withWidth'
 
+// Get user posts
 const GET_DATA_QUERY = gql`
   query getPost($email:String!){
   User(email:$email)
@@ -36,7 +39,9 @@ const GET_DATA_QUERY = gql`
 function PostGrid({email}) {
   const {isAuthenticated, user} = useAuth0();
   const history = useHistory();
+
   console.log("{email} = ",{email}, "email = ", email);
+  // Get all the posts
   const { loading, error, data } = useQuery(GET_DATA_QUERY,{variables:{email:email.email}});
   if (error) return <p>Error</p>
   if (loading) return <p>Loading</p>
@@ -50,6 +55,7 @@ function PostGrid({email}) {
     {
       const url = post.has_image[0].url
       return(
+        // Link to the individual post
         <div onClick = {()=>{
           history.push({
             pathname: '/post',

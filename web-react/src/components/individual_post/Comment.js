@@ -8,7 +8,7 @@ var Sentiment = require('sentiment')
 const { v4: uuidv4 } = require('uuid');
 
 
-
+// Mutatino to add a comment
 const ADD_COMMENT = gql`
   mutation add_comment(
     $sentiment: Int
@@ -67,6 +67,7 @@ function Comment({id, email}) {
     const [sentiment, setsentiment] = useState(0);
 
     useEffect(()=>{
+      // Gets geolocation from the browser every time the component is loaded.
         navigator.geolocation.getCurrentPosition((position)=>{
             console.log("position = ", position);
             setlat(position.coords.latitude);
@@ -75,11 +76,14 @@ function Comment({id, email}) {
     },[])
 
     const sentiment1 = new Sentiment();
+
     function handleChange(e) {
+
       setCom(e.target.value);
       const res = sentiment1.analyze(Com)
       setsentiment(res.score);
       console.log("Sentiment = ",sentiment);
+      // Calculate sentiment value for the entered text.
   }
     function onSubmit(Com, id, email) {
         let Ctime = new Date();

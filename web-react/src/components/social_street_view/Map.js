@@ -8,6 +8,9 @@ import { gql, useQuery } from '@apollo/client'
 import { useHistory } from 'react-router-dom'
 
 const fetcher = (...args) => fetch(...args).then((response) => response.json())
+
+// Get post data for social street view
+
 const GET_DATA_QUERY = gql`
   query mapget {
     Post {
@@ -38,6 +41,7 @@ export default function Map() {
     }
 }, [loading, data]);
 
+  // Set viewport for mapbox
   const [viewport, setViewport] = useState({
     latitude: 19.05884593854442,
     longitude: 72.90418657347465,
@@ -48,6 +52,7 @@ export default function Map() {
     transitionDuration: 'auto',
   })
   let crimes = Data.Post
+  // Clustering
   const points = crimes.map((crime) => ({
     type: 'Feature',
     properties: {

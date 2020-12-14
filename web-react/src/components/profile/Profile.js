@@ -1,3 +1,4 @@
+// Profile page of the user
 import React from 'react'
 import PostGrid from './PostGrid'
 import Details from './Details'

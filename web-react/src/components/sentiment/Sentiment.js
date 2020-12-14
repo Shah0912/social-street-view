@@ -4,6 +4,7 @@ import data1 from '../maharashtra_districts1 (copy).json'
 import { Container } from '@material-ui/core'
 import { useQuery, gql } from '@apollo/client'
 
+// Get comment data
 const GET_DATA_QUERY = gql`
   query getComments($id: String!) {
     Image(filter: {id: $id}) {
@@ -22,6 +23,7 @@ function Sentiment(id) {
   })
   const [Data, setData] = useState([])
 
+  // Set viewPort for mapbox
   const [viewport, setViewport] = useState({
     longitude: 74.781153,
     latitude: 19.496864,

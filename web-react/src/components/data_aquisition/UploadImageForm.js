@@ -10,7 +10,7 @@ import {Grid,TextField,makeStyles, Button} from '@material-ui/core'
 
 const { v4: uuidv4 } = require('uuid');
 
-
+// Upload image to cloudinary custom mutation
 const UPLOAD_IMAGE_TO_CLOUDINARY = gql`
   mutation UploadImageToCloudinary($file: String! $uploadOptions: UploadOptionsInput){
     uploadImage(file: $file uploadOptions: $uploadOptions) {
@@ -23,6 +23,7 @@ const UPLOAD_IMAGE_TO_CLOUDINARY = gql`
   }
 `
 
+// Add image mutation
 const ADDIMAGE = gql`
   mutation addImage($Pid: String!, $Ptime: String!, $tags: String, $latitude: String, $longitude: String, $Iid: String!, $caption: String!, $url: String!, $email: String!) {
     CreatePost(id:$Pid, tags: $tags, latitude: $latitude, longitude: $longitude) {
@@ -60,8 +61,10 @@ const ADDIMAGE = gql`
 export default function UploadImageForm(props) {
 
   const {isAuthenticated, user} = useAuth0();
+  // Authentication context
 
   const [uploadImage] = useMutation(UPLOAD_IMAGE_TO_CLOUDINARY)
+  // Hook to call the uploadImage to Cloudinary mutation
 
   const [uploadOptions, setUploadOptions] = React.useState({});
   const [fileToUpload, setFileToUpload] = React.useState({});
@@ -127,6 +130,7 @@ export default function UploadImageForm(props) {
         console.log("Ptime", Ptime);
         console.log("url", url);
 
+        // Get coordinates from LocationIQ
         let url =
          "https://us1.locationiq.com/v1/search.php?key=b63d71d9d444f7&q=" +
          Location.split(" ").join("%20") +

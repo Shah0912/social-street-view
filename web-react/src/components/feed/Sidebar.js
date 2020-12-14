@@ -5,7 +5,7 @@ import {useAuth0} from '@auth0/auth0-react'
 
 import "./Sidebar.css"
 
-
+// Uses custom query getSuggestions defined in the resolver.js inside /api/src
 const GET_SUGGESTION = gql`
     query GetSuggestions ($email: String!) {
         getSuggestions(email: $email) {
@@ -23,7 +23,7 @@ function Sidebar() {
         variables: {email: user.email},
         // pollInterval: 1000,
     });
-
+    //pollInterval is the interval in ms after which it runs the query again and updates the data.
     
 
     const [Data, setData] = useState(undefined);
@@ -39,6 +39,7 @@ function Sidebar() {
     if (error) return `Error! ${error.message}`;
     console.log("Data = ", data);
 
+    //If the data is successfully queried
     if(Data) {
         return (
             <div className="sidebar">
@@ -77,7 +78,7 @@ function Sidebar() {
     // ])
 
     return (
-
+        //If Data is set to NULL
         <div className="sidebar">
             <p>Error in loading the suggestions. Please reload</p>             
         </div>

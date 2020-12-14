@@ -7,6 +7,7 @@ import path from 'path'
  * fallback to schema.graphql if GRAPHQL_SCHEMA environment variable is not set
  */
 
+//  Generate graphql based on the schema.graphql file
 export const typeDefs = fs
   .readFileSync(
     process.env.GRAPHQL_SCHEMA || path.join(__dirname, 'schema.graphql')
