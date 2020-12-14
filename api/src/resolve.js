@@ -1,10 +1,13 @@
+import dotenv from 'dotenv'
 const cloudinary = require('cloudinary').v2
 const axios = require('axios')
 
+dotenv.config()
+
 cloudinary.config({
-  cloud_name: 'dw2ejcbvt',
-  api_key: '267567191589782',
-  api_secret: 'eV-HoiMHwvvmHWLMiuOEim2hfBQ',
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 })
 // Config cloudinary
 

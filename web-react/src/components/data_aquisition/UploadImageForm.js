@@ -6,6 +6,7 @@ import { useDropzone } from 'react-dropzone';
 import {useAuth0} from '@auth0/auth0-react';
 import axios from 'axios';
 import {Grid,TextField,makeStyles, Button} from '@material-ui/core'
+import dotenv from 'dotenv'
 
 
 const { v4: uuidv4 } = require('uuid');
@@ -131,8 +132,9 @@ export default function UploadImageForm(props) {
         console.log("url", url);
 
         // Get coordinates from LocationIQ
+        let key = process.env.LOCATIONIQ_KEY;
         let url =
-         "https://us1.locationiq.com/v1/search.php?key=b63d71d9d444f7&q=" +
+         `https://us1.locationiq.com/v1/search.php?key=${key}&q=` +
          Location.split(" ").join("%20") +
          ",%20" +
          State.split(" ").join("%20") +
