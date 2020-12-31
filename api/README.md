@@ -1,9 +1,7 @@
-# GRANDstack Starter - GraphQL API
-
-## Project Report
+# Project Report
 https://docs.google.com/document/d/1w1D5LWqFN5cXVYxgaqj_KYAVtexZNhxTpjAqtfDWPt8/edit?usp=sharing
 
-## Project Snapshots
+# Project Snapshots
 
 ### Landing Page
 ![Landing Page](Snapshots/Landing.png)
@@ -23,7 +21,7 @@ https://docs.google.com/document/d/1w1D5LWqFN5cXVYxgaqj_KYAVtexZNhxTpjAqtfDWPt8/
 ### Sentiment Page
 ![Sentiment](Snapshots/Sentiment.png)
 
-
+# GRANDstack Starter - GraphQL API
 
 ## Quick Start
 
