@@ -1,5 +1,30 @@
 # GRANDstack Starter - GraphQL API
 
+## Project Report
+https://docs.google.com/document/d/1w1D5LWqFN5cXVYxgaqj_KYAVtexZNhxTpjAqtfDWPt8/edit?usp=sharing
+
+## Project Snapshots
+
+### Landing Page
+![Landing Page](Snapshots/Landing.png)
+
+### Feed Page
+![FeedPage](Snapshots/Feed.png)
+
+### Profile Page
+![Profile Page](Snapshots/Profile.png)
+
+### Individual Post Page
+![Post](Snapshots/Post.png)
+
+### Social Street View Page
+![Social-street-view Page](Snapshots/Social-street-view.png)
+
+### Sentiment Page
+![Sentiment](Snapshots/Sentiment.png)
+
+
+
 ## Quick Start
 
 Install dependencies:
